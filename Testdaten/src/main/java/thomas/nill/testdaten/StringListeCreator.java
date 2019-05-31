@@ -3,9 +3,9 @@ package thomas.nill.testdaten;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-import thomas.nill.testdaten.basis.HasVerteilung;
 import thomas.nill.testdaten.basis.ValueCreator;
 import thomas.nill.testdaten.basis.Values;
+import thomas.nill.testdaten.random.HasVerteilung;
 import thomas.nill.testdaten.random.Verteilung;
 
 public class StringListeCreator implements ValueCreator<String>, HasVerteilung{

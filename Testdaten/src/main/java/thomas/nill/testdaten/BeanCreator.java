@@ -6,7 +6,6 @@ import javax.management.RuntimeErrorException;
 
 import thomas.nill.testdaten.basis.BeanSetter;
 import thomas.nill.testdaten.basis.Creators;
-import thomas.nill.testdaten.basis.ResourceCreatorFabric;
 import thomas.nill.testdaten.basis.SimpleBeanSetter;
 import thomas.nill.testdaten.basis.TestdatenException;
 import thomas.nill.testdaten.basis.ValueCreator;

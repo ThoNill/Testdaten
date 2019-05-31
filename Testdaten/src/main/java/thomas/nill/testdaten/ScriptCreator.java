@@ -15,7 +15,6 @@ import thomas.nill.antlr4.script.scriptBaseVisitor;
 import thomas.nill.antlr4.script.scriptLexer;
 import thomas.nill.antlr4.script.scriptParser;
 import thomas.nill.testdaten.basis.ConstructorHelper;
-import thomas.nill.testdaten.basis.ResourceCreatorFabric;
 import thomas.nill.testdaten.basis.TestdatenException;
 import thomas.nill.testdaten.basis.ValueCreator;
 import thomas.nill.testdaten.basis.Values;

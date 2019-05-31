@@ -1,29 +1,27 @@
-package thomas.nill.testdaten.random;
+package thomas.nill.testdaten;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
-import java.util.function.Function;
 
-import thomas.nill.testdaten.ConstantCreator;
 import thomas.nill.testdaten.basis.ConstructorHelper;
 import thomas.nill.testdaten.basis.TestdatenException;
 import thomas.nill.testdaten.basis.ValueCreator;
 import thomas.nill.testdaten.basis.Values;
+import thomas.nill.testdaten.random.Verteilung;
 
-public class DistributionFunctionCreator implements ValueCreator<Verteilung> {
-	private Verteilung distribution;
+public class VerteilungCreator implements ValueCreator<Verteilung> {
+	private Verteilung verteilung;
 
 
 	
-	public DistributionFunctionCreator(Class<?> clazz, int max,String[] args) {
+	public VerteilungCreator(Class<?> clazz, String[] args) {
 		super();
 		try {
 			Object obj = new ConstructorHelper().searchConstructorAndCreate(clazz, args);
-			if (!(obj instanceof Function<?,?>)) {
-				throw new TestdatenException("The Class "+clazz.getSimpleName() + " is not a Function<Integer,Double> ");
+			if (!(obj instanceof Verteilung)) {
+				throw new TestdatenException("The Class "+clazz.getSimpleName() + " is not a " + Verteilung.class.getSimpleName());
 			}
-			Function<Integer,Double> fun = (Function<Integer,Double>)obj;
-			distribution = new ArrayVerteilung(max,fun);
+			verteilung = (Verteilung)obj;
 		} catch (IllegalAccessException | InvocationTargetException | InstantiationException e) {
 			e.printStackTrace();
 			throw new TestdatenException("The Class " + clazz + " has not a constructor for " + args.length
@@ -33,7 +31,7 @@ public class DistributionFunctionCreator implements ValueCreator<Verteilung> {
 
 	@Override
 	public Verteilung generateValue(Values v) {
-		return distribution;
+		return verteilung;
 	}
 
 }
