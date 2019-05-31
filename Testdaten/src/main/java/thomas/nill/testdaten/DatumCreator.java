@@ -14,9 +14,9 @@ public class DatumCreator implements ValueCreator<String>{
 
     @Override
     public String generateValue(Values values) {
-        int jahr = 1980 + jahrGenerator.zufälligeZahlBisZurGrenze();
-        int monat = 1 + monatGenerator.zufälligeZahlBisZurGrenze();
-        int tag = 1 + tagGenerator.zufälligeZahlBisZurGrenze();
+        int jahr = 1980 + jahrGenerator.generateValue(values);
+        int monat = 1 + monatGenerator.generateValue(values);
+        int tag = 1 + tagGenerator.generateValue(values);
         
         return String.format("%02d.%02d.%d", tag,monat,jahr);
     }

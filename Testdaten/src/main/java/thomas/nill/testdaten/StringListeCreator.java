@@ -3,10 +3,12 @@ package thomas.nill.testdaten;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import thomas.nill.testdaten.basis.HasVerteilung;
 import thomas.nill.testdaten.basis.ValueCreator;
 import thomas.nill.testdaten.basis.Values;
+import thomas.nill.testdaten.random.Verteilung;
 
-public class StringListeCreator implements ValueCreator<String>{
+public class StringListeCreator implements ValueCreator<String>, HasVerteilung{
     
 	private String texte[];
     private NummernBereichCreator bereich;
@@ -19,7 +21,12 @@ public class StringListeCreator implements ValueCreator<String>{
    
 	@Override
 	public String generateValue(Values v) {
-		return texte[bereich.zufälligeZahlBisZurGrenze()];
+		return texte[bereich.generateValue(v)];
+	}
+
+	@Override
+	public void setVerteilung(Verteilung verteilung) {
+		bereich.setVerteilung(verteilung);
 	}
 
 }

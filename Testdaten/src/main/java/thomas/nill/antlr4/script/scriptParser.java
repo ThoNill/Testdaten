@@ -17,9 +17,11 @@ public class scriptParser extends Parser {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		T__4=1, T__3=2, T__2=3, T__1=4, T__0=5, TEXT=6, OTHERS=7, WS=8;
+		T__6=1, T__5=2, T__4=3, T__3=4, T__2=5, T__1=6, T__0=7, TEXT=8, OTHERS=9, 
+		WS=10;
 	public static final String[] tokenNames = {
-		"<INVALID>", "'('", "')'", "'{'", "'|'", "'}'", "TEXT", "OTHERS", "WS"
+		"<INVALID>", "'('", "')'", "'{'", "'['", "'|'", "'}'", "']'", "TEXT", 
+		"OTHERS", "WS"
 	};
 	public static final int
 		RULE_script = 0, RULE_sentence = 1, RULE_normalSentence = 2, RULE_constructorCall = 3, 
@@ -83,10 +85,10 @@ public class scriptParser extends Parser {
 			setState(23);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while (_la==4) {
+			while (_la==5) {
 				{
 				{
-				setState(19); match(4);
+				setState(19); match(5);
 				setState(20); sentence();
 				}
 				}
@@ -304,6 +306,10 @@ public class scriptParser extends Parser {
 	}
 
 	public static class ConstructorArgsContext extends ParserRuleContext {
+		public List<TerminalNode> OTHERS() { return getTokens(scriptParser.OTHERS); }
+		public TerminalNode OTHERS(int i) {
+			return getToken(scriptParser.OTHERS, i);
+		}
 		public TerminalNode TEXT(int i) {
 			return getToken(scriptParser.TEXT, i);
 		}
@@ -334,21 +340,29 @@ public class scriptParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(46); match(1);
-			setState(50);
+			setState(46); match(4);
+			setState(53);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==TEXT) {
 				{
 				{
 				setState(47); match(TEXT);
+				setState(49);
+				_la = _input.LA(1);
+				if (_la==OTHERS) {
+					{
+					setState(48); match(OTHERS);
+					}
+				}
+
 				}
 				}
-				setState(52);
+				setState(55);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(53); match(2);
+			setState(56); match(7);
 			}
 		}
 		catch (RecognitionException re) {
@@ -395,20 +409,20 @@ public class scriptParser extends Parser {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(58);
+			setState(61);
 			_errHandler.sync(this);
-			_alt = getInterpreter().adaptivePredict(_input,6,_ctx);
+			_alt = getInterpreter().adaptivePredict(_input,7,_ctx);
 			while ( _alt!=2 && _alt!=-1 ) {
 				if ( _alt==1 ) {
 					{
 					{
-					setState(55); sentence();
+					setState(58); sentence();
 					}
 					} 
 				}
-				setState(60);
+				setState(63);
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,6,_ctx);
+				_alt = getInterpreter().adaptivePredict(_input,7,_ctx);
 			}
 			}
 		}
@@ -452,9 +466,9 @@ public class scriptParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(61); match(3);
-			setState(62); sentence();
-			setState(63); match(5);
+			setState(64); match(3);
+			setState(65); sentence();
+			setState(66); match(6);
 			}
 		}
 		catch (RecognitionException re) {
@@ -495,7 +509,7 @@ public class scriptParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(65); match(TEXT);
+			setState(68); match(TEXT);
 			}
 		}
 		catch (RecognitionException re) {
@@ -541,18 +555,18 @@ public class scriptParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(67); match(TEXT);
-			setState(69);
+			setState(70); match(TEXT);
+			setState(72);
 			_la = _input.LA(1);
 			if (_la==OTHERS) {
 				{
-				setState(68); match(OTHERS);
+				setState(71); match(OTHERS);
 				}
 			}
 
-			setState(71); match(1);
-			setState(72); sentence();
-			setState(73); match(2);
+			setState(74); match(1);
+			setState(75); sentence();
+			setState(76); match(2);
 			}
 		}
 		catch (RecognitionException re) {
@@ -567,25 +581,26 @@ public class scriptParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\2\3\nN\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t"+
+		"\2\3\fQ\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t"+
 		"\t\4\n\t\n\3\2\3\2\3\2\7\2\30\n\2\f\2\16\2\33\13\2\3\3\3\3\5\3\37\n\3"+
 		"\3\3\3\3\5\3#\n\3\5\3%\n\3\3\4\3\4\3\4\5\4*\n\4\3\4\3\4\3\5\3\5\3\5\3"+
-		"\6\3\6\7\6\63\n\6\f\6\16\6\66\13\6\3\6\3\6\3\7\7\7;\n\7\f\7\16\7>\13\7"+
-		"\3\b\3\b\3\b\3\b\3\t\3\t\3\n\3\n\5\nH\n\n\3\n\3\n\3\n\3\n\3\n\2\13\2\4"+
-		"\6\b\n\f\16\20\22\2\2M\2\24\3\2\2\2\4$\3\2\2\2\6)\3\2\2\2\b-\3\2\2\2\n"+
-		"\60\3\2\2\2\f<\3\2\2\2\16?\3\2\2\2\20C\3\2\2\2\22E\3\2\2\2\24\31\5\4\3"+
-		"\2\25\26\7\6\2\2\26\30\5\4\3\2\27\25\3\2\2\2\30\33\3\2\2\2\31\27\3\2\2"+
-		"\2\31\32\3\2\2\2\32\3\3\2\2\2\33\31\3\2\2\2\34%\5\b\5\2\35\37\7\t\2\2"+
-		"\36\35\3\2\2\2\36\37\3\2\2\2\37 \3\2\2\2 \"\5\6\4\2!#\7\t\2\2\"!\3\2\2"+
-		"\2\"#\3\2\2\2#%\3\2\2\2$\34\3\2\2\2$\36\3\2\2\2%\5\3\2\2\2&*\5\16\b\2"+
-		"\'*\5\22\n\2(*\5\20\t\2)&\3\2\2\2)\'\3\2\2\2)(\3\2\2\2*+\3\2\2\2+,\5\f"+
-		"\7\2,\7\3\2\2\2-.\7\b\2\2./\5\n\6\2/\t\3\2\2\2\60\64\7\3\2\2\61\63\7\b"+
-		"\2\2\62\61\3\2\2\2\63\66\3\2\2\2\64\62\3\2\2\2\64\65\3\2\2\2\65\67\3\2"+
-		"\2\2\66\64\3\2\2\2\678\7\4\2\28\13\3\2\2\29;\5\4\3\2:9\3\2\2\2;>\3\2\2"+
-		"\2<:\3\2\2\2<=\3\2\2\2=\r\3\2\2\2><\3\2\2\2?@\7\5\2\2@A\5\4\3\2AB\7\7"+
-		"\2\2B\17\3\2\2\2CD\7\b\2\2D\21\3\2\2\2EG\7\b\2\2FH\7\t\2\2GF\3\2\2\2G"+
-		"H\3\2\2\2HI\3\2\2\2IJ\7\3\2\2JK\5\4\3\2KL\7\4\2\2L\23\3\2\2\2\n\31\36"+
-		"\"$)\64<G";
+		"\6\3\6\3\6\5\6\64\n\6\7\6\66\n\6\f\6\16\69\13\6\3\6\3\6\3\7\7\7>\n\7\f"+
+		"\7\16\7A\13\7\3\b\3\b\3\b\3\b\3\t\3\t\3\n\3\n\5\nK\n\n\3\n\3\n\3\n\3\n"+
+		"\3\n\2\13\2\4\6\b\n\f\16\20\22\2\2Q\2\24\3\2\2\2\4$\3\2\2\2\6)\3\2\2\2"+
+		"\b-\3\2\2\2\n\60\3\2\2\2\f?\3\2\2\2\16B\3\2\2\2\20F\3\2\2\2\22H\3\2\2"+
+		"\2\24\31\5\4\3\2\25\26\7\7\2\2\26\30\5\4\3\2\27\25\3\2\2\2\30\33\3\2\2"+
+		"\2\31\27\3\2\2\2\31\32\3\2\2\2\32\3\3\2\2\2\33\31\3\2\2\2\34%\5\b\5\2"+
+		"\35\37\7\13\2\2\36\35\3\2\2\2\36\37\3\2\2\2\37 \3\2\2\2 \"\5\6\4\2!#\7"+
+		"\13\2\2\"!\3\2\2\2\"#\3\2\2\2#%\3\2\2\2$\34\3\2\2\2$\36\3\2\2\2%\5\3\2"+
+		"\2\2&*\5\16\b\2\'*\5\22\n\2(*\5\20\t\2)&\3\2\2\2)\'\3\2\2\2)(\3\2\2\2"+
+		"*+\3\2\2\2+,\5\f\7\2,\7\3\2\2\2-.\7\n\2\2./\5\n\6\2/\t\3\2\2\2\60\67\7"+
+		"\6\2\2\61\63\7\n\2\2\62\64\7\13\2\2\63\62\3\2\2\2\63\64\3\2\2\2\64\66"+
+		"\3\2\2\2\65\61\3\2\2\2\669\3\2\2\2\67\65\3\2\2\2\678\3\2\2\28:\3\2\2\2"+
+		"9\67\3\2\2\2:;\7\t\2\2;\13\3\2\2\2<>\5\4\3\2=<\3\2\2\2>A\3\2\2\2?=\3\2"+
+		"\2\2?@\3\2\2\2@\r\3\2\2\2A?\3\2\2\2BC\7\5\2\2CD\5\4\3\2DE\7\b\2\2E\17"+
+		"\3\2\2\2FG\7\n\2\2G\21\3\2\2\2HJ\7\n\2\2IK\7\13\2\2JI\3\2\2\2JK\3\2\2"+
+		"\2KL\3\2\2\2LM\7\3\2\2MN\5\4\3\2NO\7\4\2\2O\23\3\2\2\2\13\31\36\"$)\63"+
+		"\67?J";
 	public static final ATN _ATN =
 		ATNSimulator.deserialize(_serializedATN.toCharArray());
 	static {

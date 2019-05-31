@@ -6,8 +6,8 @@ import java.util.ResourceBundle;
 import org.junit.Test;
 
 import thomas.nill.testdaten.BeanCreator;
+import thomas.nill.testdaten.ScriptCreator;
 import thomas.nill.testdaten.basis.ResourceCreatorFabric;
-import thomas.nill.testdaten.basis.Skript;
 import thomas.nill.testdaten.basis.ValueCreator;
 import thomas.nill.testdaten.basis.ValueCreatorFabrik;
 import thomas.nill.testdaten.basis.Values;
@@ -40,12 +40,12 @@ public class TextHolenTest {
 
 	@Test
 	public void auswerten() {
-		Skript skript = new Skript("testwords");
-		System.out.println(skript.auswerten("{name}"));
-		System.out.println(skript.auswerten("upper( name ) "));
-		System.out.println(skript.auswerten("upper(name) "));
-		System.out.println(skript.auswerten("firstChar({firstname}).{lastname}@{provider} "));
-		System.out.println(skript.auswerten("thomas.nill.testdaten.NummernBereichCreator(50)"));
+		ScriptCreator scriptCreator = new ScriptCreator("testwords","{name}",new ResourceCreatorFabric("testwords"));
+		System.out.println(scriptCreator.auswerten("{name}"));
+		System.out.println(scriptCreator.auswerten("upper( name ) "));
+		System.out.println(scriptCreator.auswerten("upper(name) "));
+		System.out.println(scriptCreator.auswerten("firstChar({firstname}).{lastname}@{provider} "));
+		System.out.println(scriptCreator.auswerten("thomas.nill.testdaten.NummernBereichCreator[50]"));
 	}
 
 	@Test

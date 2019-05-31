@@ -18,7 +18,7 @@ public class ZahlCreator implements ValueCreator<String> {
     public String generateValue(Values values) {
         StringBuilder builder = new StringBuilder(länge);
         for(int i=0;i<länge;i++) {
-            builder.append(bereich.zufälligeZahlBisZurGrenze());
+            builder.append(bereich.generateValue(values));
         }
         return builder.toString();
     }

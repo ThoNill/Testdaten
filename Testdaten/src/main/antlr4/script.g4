@@ -11,9 +11,9 @@ sentence : constructorCall | OTHERS? normalSentence OTHERS? ;
  
 normalSentence : (gsentence | rsentence | textsentence) listsentence;
 
-constructorCall : TEXT  constructorArgs ;
+constructorCall : TEXT  constructorArgs;
 
-constructorArgs : '(' TEXT* ')' ;
+constructorArgs : '[' (TEXT OTHERS?)* ']' ;
 
 listsentence : (sentence)*;
 

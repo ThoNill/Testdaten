@@ -8,7 +8,6 @@ import thomas.nill.testdaten.basis.BeanSetter;
 import thomas.nill.testdaten.basis.Creators;
 import thomas.nill.testdaten.basis.ResourceCreatorFabric;
 import thomas.nill.testdaten.basis.SimpleBeanSetter;
-import thomas.nill.testdaten.basis.Skript;
 import thomas.nill.testdaten.basis.TestdatenException;
 import thomas.nill.testdaten.basis.ValueCreator;
 import thomas.nill.testdaten.basis.Values;
@@ -16,7 +15,7 @@ import thomas.nill.testdaten.basis.Values;
 public class BeanCreator<K> implements ValueCreator<K> {
 	private Class<?> clazz;
 	private BeanSetter setter;
-	private Skript fabric;
+	private ResourceCreatorFabric fabric;
 
 	public BeanCreator(Class<?> clazz) {
 		this(clazz,new SimpleBeanSetter());
@@ -26,7 +25,7 @@ public class BeanCreator<K> implements ValueCreator<K> {
 		super();
 		this.clazz = clazz;
 		this.setter = setter;
-		this.fabric = new Skript(clazz.getSimpleName());
+		this.fabric = new ResourceCreatorFabric(clazz.getSimpleName());
 	}
 
 	@Override

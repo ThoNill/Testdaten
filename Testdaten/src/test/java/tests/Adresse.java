@@ -1,5 +1,8 @@
 package tests;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Adresse {
 	String lastname;
 	String street;
@@ -8,6 +11,7 @@ public class Adresse {
 	String sex;
 	String name;
 	String email;
+	List<Anschreiben> anschreiben = new ArrayList<>();
 
 	public Adresse() {
 		super();
@@ -16,7 +20,7 @@ public class Adresse {
 	@Override
 	public String toString() {
 		return "Adresse [lastname=" + lastname + ", street=" + street + ", firstname=" + firstname + ", town=" + town
-				+ ", sex=" + sex + ", name=" + name + ", email=" + email + "]";
+				+ ", sex=" + sex + ", name=" + name + ", email=" + email + ", Anzahl Anschreiben: " + anschreiben.size()+ "]";
 	}
 
 	public void setLastname(String lastname) {
@@ -39,5 +43,9 @@ public class Adresse {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	public void addAnschreiben(Anschreiben a) {
+		anschreiben.add(a);
 	}
 }
