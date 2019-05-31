@@ -20,7 +20,7 @@ public class BeanListCreator<K>  implements ValueCreator<List<K>>{
 		List<K> list = new ArrayList<>();
 		int count = nummern.generateValue(v);
 		for(int i=0;i<count;i++) {
-			list.add(creator.generateValue(v));
+			list.add(creator.generateValue(new Values()));
 		}
 		return list;
 	}
