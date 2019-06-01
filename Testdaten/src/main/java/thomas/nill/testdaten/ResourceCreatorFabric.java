@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
+
+import lombok.extern.slf4j.Slf4j;
 import thomas.nill.testdaten.LookupCreator;
 import thomas.nill.testdaten.ScriptCreator;
 import thomas.nill.testdaten.StringListeCreator;
@@ -18,6 +20,7 @@ import thomas.nill.testdaten.basis.Values;
 import thomas.nill.testdaten.random.HasVerteilung;
 import thomas.nill.testdaten.random.Verteilung;
 
+@Slf4j
 public class ResourceCreatorFabric implements ValueCreatorFabrik {
 	private static final String INIT_DISTRIBUTION = "initDistribution_";
 	private ResourceBundle labels;
@@ -34,16 +37,16 @@ public class ResourceCreatorFabric implements ValueCreatorFabrik {
 
 	@Override
 	public ValueCreator<?> searchCreator(String name) {
-		System.out.println("Suche nach name= <" + name + ">");
+		log.debug("Suche nach name= <" + name + ">");
 		ValueCreator<?> c = creators.get(name);
 		if (c == null) {
-			System.out.println("Suche nach name= <" + name + ">");
+			log.debug("Suche nach name= <" + name + ">");
 			String text = (name.contains("{")) ? name : labels.getString(name);
 			c = createCreator(name, text);
 			creators.put(name, c);
-			System.out.println("Setze name= <" + name + "> auf " + c.toString());
+			log.debug("Setze name= <" + name + "> auf " + c.toString());
 		} else {
-			System.out.println("name= <" + name + "> ist " + c.toString());
+			log.debug("name= <" + name + "> ist " + c.toString());
 		}
 		return c;
 	}

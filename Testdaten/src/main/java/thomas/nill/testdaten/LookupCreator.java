@@ -1,11 +1,13 @@
 package thomas.nill.testdaten;
 
+import lombok.extern.slf4j.Slf4j;
 import thomas.nill.testdaten.basis.TestdatenException;
 import thomas.nill.testdaten.basis.ValueCreator;
 import thomas.nill.testdaten.basis.Values;
 import thomas.nill.testdaten.random.HasVerteilung;
 import thomas.nill.testdaten.random.Verteilung;
 
+@Slf4j
 public class LookupCreator<K> implements ValueCreator<K>, HasVerteilung {
 	private String key;
 	private ValueCreator<K> creator;
@@ -18,14 +20,14 @@ public class LookupCreator<K> implements ValueCreator<K>, HasVerteilung {
 
 	@Override
 	public K generateValue(Values v) {
-		System.out.println("Suche nach name= <" + key + "> in " + v);
+		log.debug("Suche nach name= <" + key + "> in " + v);
 		Object o = v.get(key);
 		if (o != null) {
-			System.out.println("Gefunden liefere <" + o.toString() + ">");
+			log.debug("Gefunden liefere <" + o.toString() + ">");
 			return (K) o;
 		} else {
 			K k = creator.generateValue(v);
-			System.out.println("Erzeuge <" + k.toString() + ">");
+			log.debug("Erzeuge <" + k.toString() + ">");
 			v.put(key, k);
 			return k;
 		}

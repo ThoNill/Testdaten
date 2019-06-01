@@ -3,6 +3,9 @@ package tests;
 import java.util.ArrayList;
 import java.util.List;
 
+import lombok.ToString;
+
+@ToString
 public class Adresse {
 	String lastname;
 	String street;
@@ -17,12 +20,6 @@ public class Adresse {
 		super();
 	}
 	
-	@Override
-	public String toString() {
-		return "Adresse [lastname=" + lastname + ", street=" + street + ", firstname=" + firstname + ", town=" + town
-				+ ", sex=" + sex + ", name=" + name + ", email=" + email + ", Anzahl Anschreiben: " + anschreiben.size()+ "]";
-	}
-
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
 	}

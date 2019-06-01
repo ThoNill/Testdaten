@@ -12,4 +12,8 @@ public abstract class Verteilung {
 
 	public abstract int zufälligeZahlBisZurGrenze();
 
+	public int getGrenze() {
+		return grenze;
+	}
+
 }

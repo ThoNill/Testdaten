@@ -5,6 +5,10 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import org.apache.commons.beanutils.ConstructorUtils;
 
+import lombok.extern.slf4j.Slf4j;
+import thomas.nill.testdaten.ScriptCreator;
+
+@Slf4j
 public class ConstructorHelper {
 
 	public Object searchConstructorAndCreate(Class<?> clazz, String[] args)
@@ -119,7 +123,7 @@ public class ConstructorHelper {
 			oargs[tn] = s;
 			break;
 		default:
-			// System.out.println("can not convert a String to Class " + className);
+			log.debug("can not convert a String to Class " + className);
 			return false;
 		}
 		return true;

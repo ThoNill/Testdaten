@@ -1,16 +1,13 @@
 package thomas.nill.testdaten;
-
-import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
-
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.TerminalNode;
-import org.apache.commons.beanutils.ConstructorUtils;
-import org.apache.commons.beanutils.MethodUtils;
 
+import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 import thomas.nill.antlr4.script.scriptBaseVisitor;
 import thomas.nill.antlr4.script.scriptLexer;
 import thomas.nill.antlr4.script.scriptParser;
@@ -19,6 +16,8 @@ import thomas.nill.testdaten.basis.TestdatenException;
 import thomas.nill.testdaten.basis.ValueCreator;
 import thomas.nill.testdaten.basis.Values;
 
+
+@Slf4j
 public class ScriptCreator extends scriptBaseVisitor<Object> implements ValueCreator<Object>{
 	private ResourceCreatorFabric fabric = null;
 	private Values values = null;
@@ -56,10 +55,10 @@ public class ScriptCreator extends scriptBaseVisitor<Object> implements ValueCre
 	@Override
 	public Object visitRsentence(scriptParser.RsentenceContext ctx) {
 		TerminalNode op = ctx.TEXT();
-		System.out.println("op= " + ctx.TEXT());
+		log.debug("op= " + ctx.TEXT());
 		if (op != null && ctx.sentence() != null) {
 			String arg = visitSentence(ctx.sentence()).toString();
-			System.out.println("arg= " + arg);
+			log.debug("arg= " + arg);
 			if (arg != null) {
 				return executeOp(op.getText(), arg);
 			}
@@ -69,21 +68,21 @@ public class ScriptCreator extends scriptBaseVisitor<Object> implements ValueCre
 
 	@Override
 	public Object visitNormalSentence(scriptParser.NormalSentenceContext ctx) {
-		System.out.println("visitNormalSentence= " + ctx.getText());
+		log.debug("visitNormalSentence= " + ctx.getText());
 		String nachfolger = "";
 		if (ctx.listsentence() != null && !ctx.listsentence().isEmpty()) {
 			nachfolger =  visitListsentence(ctx.listsentence()).toString();
 		}
 		if (ctx.rsentence() != null && ctx.rsentence().sentence() != null) {
-			System.out.println("visitRsentence= " + ctx.rsentence().getText());
+			log.debug("visitRsentence= " + ctx.rsentence().getText());
 			return visitRsentence(ctx.rsentence()) + nachfolger;
 		}
 		if (ctx.gsentence() != null && !ctx.gsentence().isEmpty()) {
-			System.out.println("visitGsentence= " + ctx.gsentence().getText());
+			log.debug("visitGsentence= " + ctx.gsentence().getText());
 			return visitGsentence(ctx.gsentence()) + nachfolger;
 		}
 		if (ctx.textsentence() != null && !ctx.textsentence().isEmpty()) {
-			System.out.println("textsentence= " + ctx.textsentence().getText());
+			log.debug("textsentence= " + ctx.textsentence().getText());
 			return visitTextsentence(ctx.textsentence()) + nachfolger;
 		}
 		return "visitNormalSentence";
@@ -91,7 +90,7 @@ public class ScriptCreator extends scriptBaseVisitor<Object> implements ValueCre
 
 	@Override
 	public Object visitSentence(scriptParser.SentenceContext ctx) {
-		System.out.println("visitSentence= " + ctx.getText());
+		log.debug("visitSentence= " + ctx.getText());
 		if (ctx.constructorCall() != null) {
 			return visitConstructorCall(ctx.constructorCall());
 		}

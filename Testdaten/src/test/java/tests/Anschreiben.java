@@ -1,5 +1,8 @@
 package tests;
 
+import lombok.ToString;
+
+@ToString
 public class Anschreiben {
 	String name;
 

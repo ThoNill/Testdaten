@@ -2,6 +2,10 @@ package thomas.nill.testdaten.random;
 
 import java.util.function.Function;
 
+import lombok.extern.slf4j.Slf4j;
+import thomas.nill.testdaten.ScriptCreator;
+
+@Slf4j
 public class ArrayVerteilung extends Verteilung {
 	double[] kummuliert;
 	
@@ -62,7 +66,7 @@ public class ArrayVerteilung extends Verteilung {
 	}
 	
 	public int binSeach(int start,int end,double w) {
-		System.out.println("start="+start + " end= " + end);
+		log.debug("start="+start + " end= " + end);
 		if (start == end || start == end-1) {
 			double wertInMitte = kummuliert[start];
 			if (wertInMitte < w) {
@@ -72,7 +76,7 @@ public class ArrayVerteilung extends Verteilung {
 		}
 		int mitte = berechneMitte(start, end);
 		double wertInMitte = kummuliert[mitte];
-		System.out.println("mitte= " + mitte + " wertInMitte= "+wertInMitte + " w= " + w);
+		log.debug("mitte= " + mitte + " wertInMitte= "+wertInMitte + " w= " + w);
 		
 		if (wertInMitte < w) {
 			return binSeach(mitte,end,w);

@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 
 import org.junit.Test;
 
+import lombok.extern.slf4j.Slf4j;
 import thomas.nill.testdaten.BeanCreator;
 import thomas.nill.testdaten.ScriptCreator;
 import thomas.nill.testdaten.ResourceCreatorFabric;
@@ -12,6 +13,7 @@ import thomas.nill.testdaten.basis.ValueCreator;
 import thomas.nill.testdaten.basis.ValueCreatorFabrik;
 import thomas.nill.testdaten.basis.Values;
 
+@Slf4j(topic="test")
 public class TextHolenTest {
 
 	public TextHolenTest() {
@@ -21,7 +23,7 @@ public class TextHolenTest {
 	@Test
 	public void test() {
 		ResourceBundle labels = ResourceBundle.getBundle("thomas.nill.testdaten.testwords", Locale.getDefault());
-		System.out.println("Name " + labels.getString("lastname"));
+		log.debug("Name " + labels.getString("lastname"));
 	}
 
 	@Test
@@ -32,27 +34,27 @@ public class TextHolenTest {
 		ValueCreator<?> sex = f.searchCreator("sex");
 		for (int i = 0; i < 20; i++) {
 			Values v = new Values();
-			System.out.println("Sex " + sex.generateValue(v));
-			System.out.println("Name " + name.generateValue(v));
-			System.out.println("Email " + email.generateValue(v));
+			log.debug("Sex " + sex.generateValue(v));
+			log.debug("Name " + name.generateValue(v));
+			log.debug("Email " + email.generateValue(v));
 		}
 	}
 
 	@Test
 	public void auswerten() {
 		ScriptCreator scriptCreator = new ScriptCreator("testwords","{name}",new ResourceCreatorFabric("testwords"));
-		System.out.println(scriptCreator.auswerten("{name}"));
-		System.out.println(scriptCreator.auswerten("upper( name ) "));
-		System.out.println(scriptCreator.auswerten("upper(name) "));
-		System.out.println(scriptCreator.auswerten("firstChar({firstname}).{lastname}@{provider} "));
-		System.out.println(scriptCreator.auswerten("thomas.nill.testdaten.NummernBereichCreator[50]"));
+		log.debug(scriptCreator.auswerten("{name}").toString());
+		log.debug(scriptCreator.auswerten("upper( name ) ").toString());
+		log.debug(scriptCreator.auswerten("upper(name) ").toString());
+		log.debug(scriptCreator.auswerten("firstChar({firstname}).{lastname}@{provider} ").toString());
+		log.debug(scriptCreator.auswerten("thomas.nill.testdaten.NummernBereichCreator[50]").toString());
 	}
 
 	@Test
 	public void createBean() {
 		BeanCreator<Adresse> bc = new BeanCreator<Adresse>(Adresse.class);
 		Adresse a = bc.generateValue(new Values());
-		System.out.println(a);		
+		log.debug(a.toString());		
 		}
 		
 }
