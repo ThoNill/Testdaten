@@ -3,6 +3,12 @@ package thomas.nill.testdaten;
 import thomas.nill.testdaten.basis.ValueCreator;
 import thomas.nill.testdaten.basis.Values;
 
+/**
+ * Creates values with String.format
+ * 
+ * @author tnill
+ *
+ */
 public class FormatCreator implements ValueCreator<String> {
     private ValueCreator<?>[] creators;
     private String format;

@@ -10,6 +10,15 @@ import thomas.nill.testdaten.basis.Values;
 import thomas.nill.testdaten.random.ArrayDistribution;
 import thomas.nill.testdaten.random.Distribution;
 
+
+/**
+ * A creator that creates a function that describes a {@link Distribution}
+ * 
+ * @author tnill
+ *
+ * @param <K>
+ */
+
 public class DistributionFunctionCreator implements ValueCreator<Distribution> {
 	private Distribution distribution;
 

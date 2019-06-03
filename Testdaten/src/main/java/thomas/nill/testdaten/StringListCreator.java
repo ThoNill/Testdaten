@@ -5,7 +5,12 @@ import thomas.nill.testdaten.basis.ValueCreator;
 import thomas.nill.testdaten.basis.Values;
 import thomas.nill.testdaten.random.Distribution;
 import thomas.nill.testdaten.random.HasDistribution;
-
+/**
+ * Selects a String from am Array of Strings separated with a |
+ * 
+ * @author tnill
+ *
+ */
 public class StringListCreator implements ValueCreator<String>, HasDistribution{
     
 	private String texte[];
@@ -24,8 +29,8 @@ public class StringListCreator implements ValueCreator<String>, HasDistribution{
 
 	@Override
 	public void setVerteilung(Distribution distribution) {
-		if (texte.length < distribution.getGrenze()) {
-			throw new TestdataException("Anzahl der Texte " + (texte.length+1) + " passen nicht zur Distribution " + distribution.getGrenze());
+		if (texte.length < distribution.getMax()) {
+			throw new TestdataException("Anzahl der Texte " + (texte.length+1) + " passen nicht zur Distribution " + distribution.getMax());
 		}
 		bereich.setVerteilung(distribution);
 	}

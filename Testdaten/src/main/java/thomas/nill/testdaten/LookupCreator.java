@@ -7,6 +7,17 @@ import thomas.nill.testdaten.basis.Values;
 import thomas.nill.testdaten.random.Distribution;
 import thomas.nill.testdaten.random.HasDistribution;
 
+/**
+ * Creates an inserts a value in a {@link Values} map.
+ * It uses an other {@link ValueCreator}
+ * 
+ * @author tnill
+ *
+ * If the value ist already created this Creator uses always the same value
+ * from the map.
+ * 
+ * @param <K>
+ */
 @Slf4j
 public class LookupCreator<K> implements ValueCreator<K>, HasDistribution {
 	private String key;

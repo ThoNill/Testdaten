@@ -6,6 +6,13 @@ import java.util.List;
 import thomas.nill.testdaten.basis.ValueCreator;
 import thomas.nill.testdaten.basis.Values;
 
+/**
+ * Create a list of beans, with the help of a {@link BeanCreator}
+ * 
+ * @author tnill
+ *
+ * @param <K>
+ */
 public class BeanListCreator<K>  implements ValueCreator<List<K>>{
 	private BeanCreator<K> creator;
 	private RangeCreator nummern;

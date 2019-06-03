@@ -4,13 +4,19 @@ import java.util.function.Function;
 
 import lombok.extern.slf4j.Slf4j;
 
+
+/**
+ * Probability distribution based on a array of probabilities.
+ * @author tnill
+ *
+ */
 @Slf4j
 public class ArrayDistribution extends Distribution {
 	double[] kummuliert;
 	
-	public ArrayDistribution(Double[] wahrscheinlichkeit) {
-		super(wahrscheinlichkeit.length);
-		addTheProbabilities(wahrscheinlichkeit);
+	public ArrayDistribution(Double[] probDistribution) {
+		super(probDistribution.length);
+		addTheProbabilities(probDistribution);
 	}
 
 	public ArrayDistribution(int max,Function<Integer,Double> distribution) {
@@ -60,8 +66,8 @@ public class ArrayDistribution extends Distribution {
 	}
 
 	@Override
-	public int zufälligeZahlBisZurGrenze() {
-		return binSeach(0, grenze, Math.random());
+	public int randomNumberLowerOrEqualsThenMax() {
+		return binSeach(0, max, Math.random());
 	}
 	
 	public int binSeach(int start,int end,double w) {
@@ -73,7 +79,7 @@ public class ArrayDistribution extends Distribution {
 			}
 			return start;
 		}
-		int mitte = berechneMitte(start, end);
+		int mitte = calculateMiddle(start, end);
 		double wertInMitte = kummuliert[mitte];
 		log.debug("mitte= " + mitte + " wertInMitte= "+wertInMitte + " w= " + w);
 		
@@ -84,7 +90,7 @@ public class ArrayDistribution extends Distribution {
 		}
 	}
 
-	private int berechneMitte(int start, int end) {
+	private int calculateMiddle(int start, int end) {
 		int mitte = start+end;
 		if( mitte % 2 == 1 ) {
 			mitte--;

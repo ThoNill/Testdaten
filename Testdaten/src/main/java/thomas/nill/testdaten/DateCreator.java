@@ -1,7 +1,16 @@
 package thomas.nill.testdaten;
 
+import java.util.Date;
+
 import thomas.nill.testdaten.basis.ValueCreator;
 import thomas.nill.testdaten.basis.Values;
+/**
+ * Create a {@link Date}
+ * 
+ * @author tnill
+ *
+ * @param <K>
+ */
 
 public class DateCreator implements ValueCreator<String>{
     RangeCreator jahrGenerator = new RangeCreator(50);

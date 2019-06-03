@@ -9,6 +9,12 @@ import org.apache.commons.beanutils.ConstructorUtils;
 
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * Helper class for the call of constructors.
+ * 
+ * @author tnill
+ *
+ */
 @Slf4j
 public class ConstructorHelper {
 

@@ -1,7 +1,12 @@
 package thomas.nill.testdaten.random;
 
 import java.util.function.Function;
-
+/**
+ * Normal or Gauﬂ Distribution
+ * 
+ * @author tnill
+ *
+ */
 public class GauﬂDistribution implements Function<Integer,Double> {
 	private double my;
 	private double sigmaSquare;

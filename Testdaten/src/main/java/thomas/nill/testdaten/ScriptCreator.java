@@ -16,7 +16,58 @@ import thomas.nill.testdaten.basis.TestdataException;
 import thomas.nill.testdaten.basis.ValueCreator;
 import thomas.nill.testdaten.basis.Values;
 
-
+/**
+ * Creates a value with a script language
+ * @author tnill
+ * <p>
+ * This {@link ValueCreator} is used in {@link ResourceCreatorFabric}
+ * In the resource properties file for every name is a short script.
+ * <p>
+ * An example:
+ * <p>
+ * {@literal provider=t-online.de|gmx.de|web.de|hotmail.de|yahoo.de}<br>
+ * {@literal sex=m|w}<br>
+ * {@literal firstname_w = Luise| Lotte|Susanne|Emmy|Sonja|}<br>
+ * {@literal firstname_m = Manfred|Thomas|Ralf|Carl Friedrich|Hermann|Bernhard|Leonhard|David}<br>
+ * {@literal firstname={firstname_{sex}}}<br>
+ * {@literal name={title}{firstname} {lastname}}<br>
+ * {@literal email={firstname}.{lastname}@{provider}}<br>
+ * <p>
+ * the {@literal provider=t-online.de|gmx.de|web.de|hotmail.de|yahoo.de}<br>
+ * create a instance of {@link StringListCreator}. The same for
+ * {@literal sex=m|w} and firstname_w, firstname_m
+ * <p>
+ * firstname={firstname_{sex}} is a little script, it refers with
+ * {sex} to the sex array. If sex=w then it look in the array
+ * firstname_w for a name. If sex=m it look in the array firstname_m.
+ * <p> 
+ * {@literal name={title}{firstname} {lastname}}<br>
+ * describes a simple concatenation.
+ * <p>
+ * {@literal email={firstname}.{lastname}@{provider}|firstChar({firstname}).{lastname}@{provider}}<br>
+ * is a switch with | as seperator between
+ * <p>
+ * {@literal email={firstname}.{lastname}@{provider}}<br>
+ * and<br>
+ * {@literal email=firstChar({firstname}).{lastname}@{provider}}<br>
+ * <p>
+ * The firstChar is a function applies to {@literal {firstname}}
+ * <p>
+ * Constructor calls look like:
+ * <p>
+ * {@literal initDistribution_lastname=thomas.nill.testdaten.DistributionCreator[thomas.nill.testdaten.random.ArrayDistribution 0.3 0.2 0.2 0.2 0.1]}<br>
+ * {@literal initDistribution_streetName=thomas.nill.testdaten.DistributionFunctionCreator[thomas.nill.testdaten.random.GauﬂDistribution 10 5.0 2.0]}<br>
+ * <p>
+ * for distributions that are use in lastname, streetName. The initDistribution_
+ * is a hint, that distributions will be instantiated.
+ * <p>
+ * For the creation of sub bean, are the constructors
+ * <p>
+ * {@literal addAnschreiben=thomas.nill.testdaten.BeanListCreator[tests.Anschreiben 5]}<br>
+ * 
+ *
+ *
+ */
 @Slf4j
 public class ScriptCreator extends scriptBaseVisitor<Object> implements ValueCreator<Object>{
 	private ResourceCreatorFabric fabric = null;

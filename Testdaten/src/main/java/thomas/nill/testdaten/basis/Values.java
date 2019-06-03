@@ -1,7 +1,13 @@
 package thomas.nill.testdaten.basis;
 
 import java.util.HashMap;
-
+/**
+ * A Values Map contains the generated test values.
+ * 
+ * @author tnill
+ *
+ * Every value has a name. 
+ */
 public class Values {
 	HashMap<String, Object> values = new HashMap<>();
 

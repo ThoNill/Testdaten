@@ -2,6 +2,16 @@ package thomas.nill.testdaten.basis;
 
 import java.util.HashMap;
 
+import thomas.nill.testdaten.ResourceCreatorFabric;
+
+/**
+ * Creators is a map of {@link ValueCreator} it is used in
+ * {@link ResourceCreatorFabric}
+ * 
+ * @author tnill
+ *
+ *         Instances of this class stores {@link ValueCreator}
+ */
 public class Creators {
 	HashMap<String, ValueCreator<?>> values = new HashMap<>();
 
@@ -17,6 +27,12 @@ public class Creators {
 		return values.put(key, value);
 	}
 
+	/**
+	 * Generate new values, eventually stored in {@link Values}
+	 * 
+	 * @param v
+	 * @return
+	 */
 	public Object generateNewFieldValue(Values v) {
 		for (String key : values.keySet()) {
 			generateNewFieldValue(key, v);
@@ -28,5 +44,5 @@ public class Creators {
 		Object value = get(key).generateValue(v);
 		v.put(key, value);
 	}
-	
+
 }

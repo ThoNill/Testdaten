@@ -3,6 +3,12 @@ package thomas.nill.testdaten;
 import thomas.nill.testdaten.basis.ValueCreator;
 import thomas.nill.testdaten.basis.Values;
 
+/**
+ * Create a long ID
+ * 
+ * @author tnill
+ *
+ */
 public class IdCreator implements ValueCreator<Long> {
     private long id;
     

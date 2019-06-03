@@ -1,19 +1,24 @@
 package thomas.nill.testdaten.random;
 
+/**
+ * Probability distribution
+ * @author tnill
+ *
+ */
 public abstract class Distribution {
-	protected int grenze = 10;
+	protected int max = 10;
 
-	public Distribution(int grenze) {
-		if (grenze < 0) {
+	public Distribution(int max) {
+		if (max < 0) {
 			throw new IllegalArgumentException("Grenze sollte >= 0 sein");
 		}
-		this.grenze = grenze;
+		this.max = max;
 	}
 
-	public abstract int zufälligeZahlBisZurGrenze();
+	public abstract int randomNumberLowerOrEqualsThenMax();
 
-	public int getGrenze() {
-		return grenze;
+	public int getMax() {
+		return max;
 	}
 
 }

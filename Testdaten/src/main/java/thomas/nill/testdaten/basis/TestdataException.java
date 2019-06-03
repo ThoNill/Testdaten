@@ -1,6 +1,12 @@
 package thomas.nill.testdaten.basis;
-
+/**
+ * Runtime Exception for this Testdata creation library.
+ * 
+ * @author tnill
+ *
+ */
 public class TestdataException extends RuntimeException{
+	private static final long serialVersionUID = -9195601128824267758L;
 
 	public TestdataException() {
 		super();
@@ -22,9 +28,5 @@ public class TestdataException extends RuntimeException{
 		super(cause);
 	}
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -9195601128824267758L;
 
 }

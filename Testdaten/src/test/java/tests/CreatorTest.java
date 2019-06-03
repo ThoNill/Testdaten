@@ -182,6 +182,7 @@ public class CreatorTest {
 	public void testScriptError() {
 		testScriptError("{test");
 		testScriptError("{test{sex}}");
+		testScriptError("test[]");
 	}
 
 	public void testScriptError(String script) {

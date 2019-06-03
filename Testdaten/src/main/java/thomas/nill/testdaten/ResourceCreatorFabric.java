@@ -14,7 +14,13 @@ import thomas.nill.testdaten.basis.ValueCreatorFabrik;
 import thomas.nill.testdaten.basis.Values;
 import thomas.nill.testdaten.random.Distribution;
 import thomas.nill.testdaten.random.HasDistribution;
-
+/**
+ * A {@link ResourceCreatorFabric} uses {@link ResourceBundle} to create {@link ValueCreator}.
+ * 
+ * @author tnill
+ *
+ * The {@link ResourceBundle} properties files uses a script language.	
+ */
 @Slf4j
 public class ResourceCreatorFabric implements ValueCreatorFabrik {
 	private static final String INIT_DISTRIBUTION = "initDistribution_";
@@ -48,7 +54,8 @@ public class ResourceCreatorFabric implements ValueCreatorFabrik {
 	}
 
 	private ValueCreator<?> createCreator(String name, String text) {
-		if (text.contains("{") || text.contains("(") || text.contains("[")) {
+		if (text.contains("{") || text.contains("(") || text.contains("[") || text.contains("}") || text.contains(")")
+				|| text.contains("]")) {
 			if (text.contains("|")) {
 				List<ValueCreator<?>> liste = new ArrayList<>();
 				String[] texte = text.split("\\|");
@@ -75,7 +82,8 @@ public class ResourceCreatorFabric implements ValueCreatorFabrik {
 			if (!key.startsWith(INIT_DISTRIBUTION)) {
 				searchCreator(key).generateValue(values);
 			}
-		};
+		}
+		;
 	}
 
 	private void initDistributions(Values values) {
@@ -90,11 +98,13 @@ public class ResourceCreatorFabric implements ValueCreatorFabrik {
 		if (key.startsWith(INIT_DISTRIBUTION)) {
 			ValueCreator c = searchCreator(key.substring(INIT_DISTRIBUTION.length()));
 			if (!(c instanceof HasDistribution)) {
-				throw new TestdataException("Class " + c.getClass().getSimpleName() + " does not implement "+ HasDistribution.class.getSimpleName());
+				throw new TestdataException("Class " + c.getClass().getSimpleName() + " does not implement "
+						+ HasDistribution.class.getSimpleName());
 			}
 			Object obj = searchCreator(key).generateValue(values);
 			if (!(obj instanceof Distribution)) {
-				throw new TestdataException("Class " + obj.getClass().getSimpleName() + " is not a "+ Distribution.class.getSimpleName());
+				throw new TestdataException(
+						"Class " + obj.getClass().getSimpleName() + " is not a " + Distribution.class.getSimpleName());
 			}
 			Distribution distribution = (Distribution) obj;
 			((HasDistribution) c).setVerteilung(distribution);

@@ -6,12 +6,15 @@ import thomas.nill.testdaten.random.Distribution;
 import thomas.nill.testdaten.random.EqualDistribution;
 import thomas.nill.testdaten.random.HasDistribution;
 
+/**
+ * Generate number for 0 to the max value of the {@link Distribution}
+ * 
+ * @author tnill
+ *
+ */
 public class RangeCreator implements ValueCreator<Integer>, HasDistribution {
     private Distribution distribution;
     
-
-
-
 	public RangeCreator(Distribution distribution) {
 		super();
 		this.distribution = distribution;
@@ -27,7 +30,7 @@ public class RangeCreator implements ValueCreator<Integer>, HasDistribution {
 
     @Override
     public Integer generateValue(Values values) {
-        return Integer.valueOf(distribution.zufälligeZahlBisZurGrenze());
+        return Integer.valueOf(distribution.randomNumberLowerOrEqualsThenMax());
      }
 
     @Override

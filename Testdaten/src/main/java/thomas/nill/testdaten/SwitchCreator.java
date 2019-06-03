@@ -7,6 +7,13 @@ import thomas.nill.testdaten.basis.Values;
 import thomas.nill.testdaten.random.Distribution;
 import thomas.nill.testdaten.random.HasDistribution;
 
+/**
+ * Uses a List of {@link ValueCreator} an switch between these {@link ValueCreator}
+ * 
+ * @author tnill
+ *
+ * @param <K>
+ */
 public class SwitchCreator<K> implements ValueCreator<K>, HasDistribution {
 	private List<ValueCreator<K>> liste;
 	private RangeCreator bereich;

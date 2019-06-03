@@ -1,6 +1,7 @@
 package thomas.nill.testdaten;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.Date;
 
 import thomas.nill.testdaten.basis.ConstructorHelper;
 import thomas.nill.testdaten.basis.TestdataException;
@@ -8,10 +9,16 @@ import thomas.nill.testdaten.basis.ValueCreator;
 import thomas.nill.testdaten.basis.Values;
 import thomas.nill.testdaten.random.Distribution;
 
+/**
+ * A creator that creates a {@link Distribution}
+ * 
+ * @author tnill
+ *
+ * @param <K>
+ */
+
 public class DistributionCreator implements ValueCreator<Distribution> {
 	private Distribution distribution;
-
-
 	
 	public DistributionCreator(Class<?> clazz, String[] args) {
 		super();

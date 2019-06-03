@@ -30,7 +30,7 @@ public class ProbabilityTest {
 	private long[] countGeneratedValues(int c, ArrayDistribution dist, int countExperiments) {
 		long[] count = new long[c];
 		for(int i=0;i< countExperiments;i++) {
-			count[dist.zufälligeZahlBisZurGrenze()]++;
+			count[dist.randomNumberLowerOrEqualsThenMax()]++;
 		}
 		return count;
 	}

@@ -7,9 +7,9 @@ public class EqualDistribution extends Distribution{
 	}
 
 	@Override
-	public int zufälligeZahlBisZurGrenze() {
-		int n = (int) (Math.random() * (grenze + 1));
-		return (n > grenze) ? grenze : n;
+	public int randomNumberLowerOrEqualsThenMax() {
+		int n = (int) (Math.random() * (max + 1));
+		return (n > max) ? max : n;
 	}
 
 }

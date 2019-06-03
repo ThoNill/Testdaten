@@ -8,6 +8,13 @@ import thomas.nill.testdaten.basis.TestdataException;
 import thomas.nill.testdaten.basis.ValueCreator;
 import thomas.nill.testdaten.basis.Values;
 
+/**
+ * Create a bean
+ * 
+ * @author tnill
+ *
+ * @param <K>
+ */
 public class BeanCreator<K> implements ValueCreator<K> {
 	private Class<?> clazz;
 	private BeanSetter setter;
