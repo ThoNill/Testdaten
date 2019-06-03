@@ -186,14 +186,14 @@ public class CreatorTest {
 	}
 
 	@Test
-	public void testTelefonCreator() {
+	public void testPhoneCreator() {
 		ValueCreatorFabrik f = new ResourceCreatorFabric("tests.testwords");
 
-		TelefonCreator c = new TelefonCreator();
-		String telefon = c.generateValue(new Values());
-		log.debug("Telefon: " + telefon);
+		PhoneCreator c = new PhoneCreator();
+		String phone = c.generateValue(new Values());
+		log.debug("Telefon: " + phone);
 		Pattern p = Pattern.compile("[0-9]+-[0-9]+");
-		Matcher m = p.matcher(telefon);
+		Matcher m = p.matcher(phone);
 		assertTrue(m.matches());
 	}
 
@@ -201,7 +201,7 @@ public class CreatorTest {
 	public void testStreetCreator() {
 		ValueCreatorFabrik f = new ResourceCreatorFabric("tests.testwords");
 
-		StraﬂenCreator c = new StraﬂenCreator(f);
+		StreetCreator c = new StreetCreator(f);
 		String street = c.generateValue(new Values());
 		log.debug("Strasse: " + street);
 		Pattern p = Pattern.compile("[A-Za-z]+ [0-9]+");
