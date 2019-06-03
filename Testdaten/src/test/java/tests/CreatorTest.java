@@ -179,6 +179,23 @@ public class CreatorTest {
 	}
 
 	@Test
+	public void testScriptError() {
+		testScriptError("{test");
+		testScriptError("{test{sex}}");
+	}
+
+	public void testScriptError(String script) {
+		ScriptCreator scriptCreator = new ScriptCreator("testwords", "{name}",
+				new ResourceCreatorFabric("tests.testwords"));
+		try {
+			log.debug(scriptCreator.auswerten(script).toString());
+			fail("i want a Exception");
+		} catch (Exception e) {
+			log.debug("Exception: " + e);
+		}
+	}
+
+	@Test
 	public void testBeanCreator() {
 		BeanCreator<Adresse> bc = new BeanCreator<Adresse>(Adresse.class);
 		Adresse a = bc.generateValue(new Values());
@@ -204,7 +221,7 @@ public class CreatorTest {
 		StreetCreator c = new StreetCreator(f);
 		String street = c.generateValue(new Values());
 		log.debug("Strasse: " + street);
-		Pattern p = Pattern.compile("[A-Za-z]+ [0-9]+");
+		Pattern p = Pattern.compile("[A-Za-zƒ÷‹‰ˆ¸ﬂ]+ +[0-9]+");
 		Matcher m = p.matcher(street);
 		assertTrue(m.matches());
 	}
