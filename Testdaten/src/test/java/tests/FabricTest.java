@@ -14,20 +14,19 @@ import thomas.nill.testdaten.basis.ValueCreatorFabrik;
 import thomas.nill.testdaten.basis.Values;
 
 @Slf4j(topic = "test")
-public class TextHolenTest {
+public class FabricTest {
 
-	public TextHolenTest() {
-		// TODO Auto-generated constructor stub
+	public FabricTest() {
 	}
 
 	@Test
-	public void test() {
+	public void testBundle() {
 		ResourceBundle labels = ResourceBundle.getBundle("tests.testwords", Locale.getDefault());
 		log.debug("Name " + labels.getString("lastname"));
 	}
 
 	@Test
-	public void test2() {
+	public void testFabric() {
 		ValueCreatorFabrik f = new ResourceCreatorFabric("tests.testwords");
 		ValueCreator<?> name = f.searchCreator("name");
 		ValueCreator<?> email = f.searchCreator("email");
@@ -40,22 +39,7 @@ public class TextHolenTest {
 		}
 	}
 
-	@Test
-	public void auswerten() {
-		ScriptCreator scriptCreator = new ScriptCreator("testwords", "{name}", new ResourceCreatorFabric("tests.testwords"));
-		log.debug(scriptCreator.auswerten("{name}").toString());
-		log.debug(scriptCreator.auswerten("upper( name ) ").toString());
-		log.debug(scriptCreator.auswerten("upper(name) ").toString());
-		log.debug(scriptCreator.auswerten("firstChar({firstname}).{lastname}@{provider} ").toString());
-		log.debug(scriptCreator.auswerten("thomas.nill.testdaten.RangeCreator[50]").toString());
-	}
 
-	@Test
-	public void createBean() {
-		BeanCreator<Adresse> bc = new BeanCreator<Adresse>(Adresse.class);
-		Adresse a = bc.generateValue(new Values());
-		log.debug(a.toString());
-	}
 	
 
 }

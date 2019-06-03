@@ -1,21 +1,28 @@
 package tests;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.junit.Test;
 
 import lombok.extern.slf4j.Slf4j;
+import thomas.nill.testdaten.BeanCreator;
 import thomas.nill.testdaten.ConstantCreator;
 import thomas.nill.testdaten.IdCreator;
 import thomas.nill.testdaten.LookupCreator;
 import thomas.nill.testdaten.NumberCreator;
 import thomas.nill.testdaten.RangeCreator;
+import thomas.nill.testdaten.ResourceCreatorFabric;
+import thomas.nill.testdaten.ScriptCreator;
 import thomas.nill.testdaten.StringListCreator;
 import thomas.nill.testdaten.SwitchCreator;
 import thomas.nill.testdaten.basis.ValueCreator;
+import thomas.nill.testdaten.basis.ValueCreatorFabrik;
 import thomas.nill.testdaten.basis.Values;
 
 @Slf4j(topic = "test")
@@ -158,6 +165,48 @@ public class CreatorTest {
 			}
 		}
 
+	}
+
+	@Test
+	public void testScriptCreator() {
+		ScriptCreator scriptCreator = new ScriptCreator("testwords", "{name}",
+				new ResourceCreatorFabric("tests.testwords"));
+		log.debug(scriptCreator.auswerten("{name}").toString());
+		log.debug(scriptCreator.auswerten("upper( name ) ").toString());
+		log.debug(scriptCreator.auswerten("upper(name) ").toString());
+		log.debug(scriptCreator.auswerten("firstChar({firstname}).{lastname}@{provider} ").toString());
+		log.debug(scriptCreator.auswerten("thomas.nill.testdaten.RangeCreator[50]").toString());
+	}
+
+	@Test
+	public void testBeanCreator() {
+		BeanCreator<Adresse> bc = new BeanCreator<Adresse>(Adresse.class);
+		Adresse a = bc.generateValue(new Values());
+		log.debug(a.toString());
+	}
+
+	@Test
+	public void testTelefonCreator() {
+		ValueCreatorFabrik f = new ResourceCreatorFabric("tests.testwords");
+
+		TelefonCreator c = new TelefonCreator();
+		String telefon = c.generateValue(new Values());
+		log.debug("Telefon: " + telefon);
+		Pattern p = Pattern.compile("[0-9]+-[0-9]+");
+		Matcher m = p.matcher(telefon);
+		assertTrue(m.matches());
+	}
+
+	@Test
+	public void testStreetCreator() {
+		ValueCreatorFabrik f = new ResourceCreatorFabric("tests.testwords");
+
+		StraﬂenCreator c = new StraﬂenCreator(f);
+		String street = c.generateValue(new Values());
+		log.debug("Strasse: " + street);
+		Pattern p = Pattern.compile("[A-Za-z]+ [0-9]+");
+		Matcher m = p.matcher(street);
+		assertTrue(m.matches());
 	}
 
 }

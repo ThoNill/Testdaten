@@ -9,6 +9,7 @@ public class FormatCreator implements ValueCreator<String> {
     
     public FormatCreator(String format,ValueCreator<?> ...creators) {
        this.creators = creators;
+       this.format = format;
     }
 
     @Override
