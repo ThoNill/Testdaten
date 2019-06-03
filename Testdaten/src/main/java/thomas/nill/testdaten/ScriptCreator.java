@@ -1,18 +1,18 @@
 package thomas.nill.testdaten;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
+
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
-import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
 import thomas.nill.antlr4.script.scriptBaseVisitor;
 import thomas.nill.antlr4.script.scriptLexer;
 import thomas.nill.antlr4.script.scriptParser;
 import thomas.nill.testdaten.basis.ConstructorHelper;
-import thomas.nill.testdaten.basis.TestdatenException;
+import thomas.nill.testdaten.basis.TestdataException;
 import thomas.nill.testdaten.basis.ValueCreator;
 import thomas.nill.testdaten.basis.Values;
 
@@ -124,11 +124,11 @@ public class ScriptCreator extends scriptBaseVisitor<Object> implements ValueCre
 
 			} catch (IllegalAccessException | InvocationTargetException | InstantiationException e) {
 				e.printStackTrace();
-				throw new TestdatenException("The Class " + clazz + " has not a constructor for " + args.length
+				throw new TestdataException("The Class " + clazz + " has not a constructor for " + args.length
 						+ " arguments or an argument and the class of the argument did not match");
 			}
 		} catch (ClassNotFoundException e) {
-			throw new TestdatenException("The Class " + clazz + " does not exist");
+			throw new TestdataException("The Class " + clazz + " does not exist");
 		}
 	}
 
@@ -176,7 +176,7 @@ public class ScriptCreator extends scriptBaseVisitor<Object> implements ValueCre
 		case "lower":
 			return arg.toLowerCase();
 		default:
-			throw new TestdatenException("operation " + op + " is not defined");
+			throw new TestdataException("operation " + op + " is not defined");
 		}
 	}
 }

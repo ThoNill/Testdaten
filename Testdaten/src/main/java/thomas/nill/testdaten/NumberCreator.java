@@ -3,14 +3,14 @@ package thomas.nill.testdaten;
 import thomas.nill.testdaten.basis.ValueCreator;
 import thomas.nill.testdaten.basis.Values;
 
-public class ZahlCreator implements ValueCreator<String> {
+public class NumberCreator implements ValueCreator<String> {
     int länge = 10;
-    private NummernBereichCreator bereich;
+    private RangeCreator bereich;
     
-    public ZahlCreator(int länge) {
+    public NumberCreator(int länge) {
         super();    
         this.länge = länge;
-        this.bereich = new NummernBereichCreator(9);
+        this.bereich = new RangeCreator(9);
     }
 
     

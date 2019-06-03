@@ -3,12 +3,12 @@ package thomas.nill.testdaten;
 import thomas.nill.testdaten.basis.ValueCreator;
 import thomas.nill.testdaten.basis.Values;
 
-public class DatumCreator implements ValueCreator<String>{
-    NummernBereichCreator jahrGenerator = new NummernBereichCreator(50);
-    NummernBereichCreator monatGenerator = new NummernBereichCreator(11);
-    NummernBereichCreator tagGenerator = new NummernBereichCreator(27);
+public class DateCreator implements ValueCreator<String>{
+    RangeCreator jahrGenerator = new RangeCreator(50);
+    RangeCreator monatGenerator = new RangeCreator(11);
+    RangeCreator tagGenerator = new RangeCreator(27);
     
-    public DatumCreator() {
+    public DateCreator() {
        
     }
 

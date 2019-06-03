@@ -53,7 +53,7 @@
 	</dependencies>
 	<build>
 		<sourceDirectory>${basedir}/src/main/java</sourceDirectory>
-		<resources>
+	<!-- 	<resources>
 			<resource>
 				<targetPath>thomas/nill/testdaten</targetPath>
 				<directory>src/main/resources</directory>
@@ -70,10 +70,11 @@
 			</resource>
 
 		</resources>
+-->
 		<testResources>
 			<testResource>
-				<targetPath>thomas/nill/testdaten</targetPath>
-				<directory>src/main/resources</directory>
+				<targetPath>tests</targetPath>
+				<directory>src/test/resources</directory>
 				<includes>
 					<include>**/*.properties</include>
 				</includes>

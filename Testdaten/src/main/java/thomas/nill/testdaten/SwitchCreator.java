@@ -4,17 +4,17 @@ import java.util.List;
 
 import thomas.nill.testdaten.basis.ValueCreator;
 import thomas.nill.testdaten.basis.Values;
-import thomas.nill.testdaten.random.HasVerteilung;
-import thomas.nill.testdaten.random.Verteilung;
+import thomas.nill.testdaten.random.Distribution;
+import thomas.nill.testdaten.random.HasDistribution;
 
-public class SwitchCreator<K> implements ValueCreator<K>, HasVerteilung {
+public class SwitchCreator<K> implements ValueCreator<K>, HasDistribution {
 	private List<ValueCreator<K>> liste;
-	private NummernBereichCreator bereich;
+	private RangeCreator bereich;
 	
 	public SwitchCreator(List<ValueCreator<K>> liste) {
 		super();
 		this.liste = liste;
-		bereich = new NummernBereichCreator(liste.size()-1);
+		bereich = new RangeCreator(liste.size()-1);
 	}
 
 	@Override
@@ -23,8 +23,8 @@ public class SwitchCreator<K> implements ValueCreator<K>, HasVerteilung {
 	}
 
 	@Override
-	public void setVerteilung(Verteilung verteilung) {
-		bereich.setVerteilung(verteilung);
+	public void setVerteilung(Distribution distribution) {
+		bereich.setVerteilung(distribution);
 	}
 
 }

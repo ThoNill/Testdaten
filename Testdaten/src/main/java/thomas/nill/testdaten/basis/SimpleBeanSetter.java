@@ -12,6 +12,7 @@ public class SimpleBeanSetter implements BeanSetter {
 		super();
 	}
 
+	@Override
 	public void updateValues(Object object, Values values) {
 		try {
 			BeanUtils.populate(object, values.getValues());
@@ -31,7 +32,7 @@ public class SimpleBeanSetter implements BeanSetter {
 			}
 
 		} catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-			throw new TestdatenException(e);
+			throw new TestdataException(e);
 		}
 	}
 }

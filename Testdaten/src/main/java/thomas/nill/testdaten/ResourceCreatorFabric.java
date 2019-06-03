@@ -2,23 +2,18 @@ package thomas.nill.testdaten;
 
 import java.util.ArrayList;
 import java.util.Enumeration;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
 import lombok.extern.slf4j.Slf4j;
-import thomas.nill.testdaten.LookupCreator;
-import thomas.nill.testdaten.ScriptCreator;
-import thomas.nill.testdaten.StringListeCreator;
-import thomas.nill.testdaten.SwitchCreator;
 import thomas.nill.testdaten.basis.Creators;
-import thomas.nill.testdaten.basis.TestdatenException;
+import thomas.nill.testdaten.basis.TestdataException;
 import thomas.nill.testdaten.basis.ValueCreator;
 import thomas.nill.testdaten.basis.ValueCreatorFabrik;
 import thomas.nill.testdaten.basis.Values;
-import thomas.nill.testdaten.random.HasVerteilung;
-import thomas.nill.testdaten.random.Verteilung;
+import thomas.nill.testdaten.random.Distribution;
+import thomas.nill.testdaten.random.HasDistribution;
 
 @Slf4j
 public class ResourceCreatorFabric implements ValueCreatorFabrik {
@@ -32,7 +27,8 @@ public class ResourceCreatorFabric implements ValueCreatorFabrik {
 	}
 
 	public ResourceCreatorFabric(String name, Locale locale) {
-		labels = ResourceBundle.getBundle("thomas.nill.testdaten." + name, locale);
+		labels = ResourceBundle.getBundle(name, locale);
+		initDistributions(new Values());
 	}
 
 	@Override
@@ -64,11 +60,10 @@ public class ResourceCreatorFabric implements ValueCreatorFabrik {
 				return new LookupCreator<Object>(name, new ScriptCreator(name, text, this));
 			}
 		}
-		return new LookupCreator<String>(name, new StringListeCreator(text));
+		return new LookupCreator<String>(name, new StringListCreator(text));
 	}
 
 	public Values getValues(Values values) {
-		initDistributions(values);
 		generateValues(values);
 		return values;
 	}
@@ -94,15 +89,15 @@ public class ResourceCreatorFabric implements ValueCreatorFabrik {
 	private void initDistribution(Values values, Enumeration<String> e, String key) {
 		if (key.startsWith(INIT_DISTRIBUTION)) {
 			ValueCreator c = searchCreator(key.substring(INIT_DISTRIBUTION.length()));
-			if (!(c instanceof HasVerteilung)) {
-				throw new TestdatenException("Class " + c.getClass().getSimpleName() + " does not implement "+ HasVerteilung.class.getSimpleName());
+			if (!(c instanceof HasDistribution)) {
+				throw new TestdataException("Class " + c.getClass().getSimpleName() + " does not implement "+ HasDistribution.class.getSimpleName());
 			}
 			Object obj = searchCreator(key).generateValue(values);
-			if (!(obj instanceof Verteilung)) {
-				throw new TestdatenException("Class " + obj.getClass().getSimpleName() + " is not a "+ Verteilung.class.getSimpleName());
+			if (!(obj instanceof Distribution)) {
+				throw new TestdataException("Class " + obj.getClass().getSimpleName() + " is not a "+ Distribution.class.getSimpleName());
 			}
-			Verteilung verteilung = (Verteilung) obj;
-			((HasVerteilung) c).setVerteilung(verteilung);
+			Distribution distribution = (Distribution) obj;
+			((HasDistribution) c).setVerteilung(distribution);
 		}
 	}
 

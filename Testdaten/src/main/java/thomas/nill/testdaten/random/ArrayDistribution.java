@@ -3,18 +3,17 @@ package thomas.nill.testdaten.random;
 import java.util.function.Function;
 
 import lombok.extern.slf4j.Slf4j;
-import thomas.nill.testdaten.ScriptCreator;
 
 @Slf4j
-public class ArrayVerteilung extends Verteilung {
+public class ArrayDistribution extends Distribution {
 	double[] kummuliert;
 	
-	public ArrayVerteilung(Double[] wahrscheinlichkeit) {
+	public ArrayDistribution(Double[] wahrscheinlichkeit) {
 		super(wahrscheinlichkeit.length);
 		addTheProbabilities(wahrscheinlichkeit);
 	}
 
-	public ArrayVerteilung(int max,Function<Integer,Double> distribution) {
+	public ArrayDistribution(int max,Function<Integer,Double> distribution) {
 		super(max);
 		Double[] prob = new Double[max];
 		double sum = initArrayWithFunction(distribution, prob);
@@ -55,8 +54,8 @@ public class ArrayVerteilung extends Verteilung {
 			}
 			kummuliert[i] = kummuliert[i-1] + wahrscheinlichkeit[i]; 
 		}
-		if (kummuliert[kummuliert.length-1] > 1.0) {
-			throw new IllegalArgumentException("Summe der Wahrscheinlichkeiten sollte <= 1.0 sein");
+		if (kummuliert[kummuliert.length-1] > 1.0001) {
+			throw new IllegalArgumentException("Summe der Wahrscheinlichkeiten sollte <= 1.0 sein ist aber "+kummuliert[kummuliert.length-1] );
 		}
 	}
 

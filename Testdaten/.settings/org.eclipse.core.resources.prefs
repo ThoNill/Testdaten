@@ -1,9 +1,9 @@
 eclipse.preferences.version=1
 encoding//src/main/java=Cp1252
-encoding//src/main/resources/Adresse_de_DE.properties=UTF-8
-encoding//src/main/resources/Anschreiben_de_DE.properties=UTF-8
 encoding//src/main/resources/log4j2.xml=UTF-8
-encoding//src/main/resources/testwords.properties=UTF-8
-encoding//src/main/resources/testwords_de.properties=UTF-8
-encoding//src/main/resources/testwords_de_DE.properties=UTF-8
 encoding//src/test/java=Cp1252
+encoding//src/test/resources/Adresse_de_DE.properties=UTF-8
+encoding//src/test/resources/Anschreiben_de_DE.properties=UTF-8
+encoding//src/test/resources/testwords.properties=UTF-8
+encoding//src/test/resources/testwords_de.properties=UTF-8
+encoding//src/test/resources/testwords_de_DE.properties=UTF-8

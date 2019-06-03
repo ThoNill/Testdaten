@@ -2,17 +2,18 @@ package thomas.nill.testdaten;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import thomas.nill.testdaten.basis.ValueCreator;
 import thomas.nill.testdaten.basis.Values;
 
 public class BeanListCreator<K>  implements ValueCreator<List<K>>{
 	private BeanCreator<K> creator;
-	private NummernBereichCreator nummern;
+	private RangeCreator nummern;
 	
 	public BeanListCreator(Class<?> clazz,int count) {
 		super();
 		creator = new BeanCreator<>(clazz);
-		nummern= new NummernBereichCreator(count);
+		nummern= new RangeCreator(count);
 	}
 	
 	@Override

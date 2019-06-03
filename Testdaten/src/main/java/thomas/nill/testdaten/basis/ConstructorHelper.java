@@ -3,37 +3,54 @@ package thomas.nill.testdaten.basis;
 import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Optional;
+
 import org.apache.commons.beanutils.ConstructorUtils;
 
 import lombok.extern.slf4j.Slf4j;
-import thomas.nill.testdaten.ScriptCreator;
 
 @Slf4j
 public class ConstructorHelper {
 
 	public Object searchConstructorAndCreate(Class<?> clazz, String[] args)
 			throws InstantiationException, IllegalAccessException, InvocationTargetException {
-		for (Constructor<?> ctor : clazz.getConstructors()) {
-			final Class<?>[] ctorParams = ctor.getParameterTypes();
-			if (ctorParams.length == args.length && noArryParameters(ctorParams, ctorParams.length)) {
-				Object obj = correctTypesAndCallConstructor(clazz, args, ctorParams);
-				if (obj != null) {
-					return obj;
-				}
-			}
+		Optional<Object> opt = argumentCountIsParameterCount(clazz, args);
+		if(opt.isEmpty()) {
+			opt = lastArgumentIsArray(clazz, args);	
 		}
+		if (opt.isPresent()) {
+			return opt.get();
+		}
+		throw new TestdataException("No Constructor found in " + clazz.getSimpleName());
+	}
+
+	private Optional<Object> lastArgumentIsArray(Class<?> clazz, String[] args)
+			throws IllegalAccessException, InvocationTargetException, InstantiationException {
 		for (Constructor<?> ctor : clazz.getConstructors()) {
 			final Class<?>[] ctorParams = ctor.getParameterTypes();
 			if (ctorParams.length < args.length && noArryParameters(ctorParams, ctorParams.length - 1)
 					&& ctorParams[ctorParams.length - 1].isArray()) {
 				Object obj = correctTypesAndCallConstructor(clazz, args, ctorParams);
 				if (obj != null) {
-					return obj;
+					return Optional.of(obj);
 				}
 			}
 		}
+		return Optional.empty();
+	}
 
-		throw new TestdatenException("No Constructor found in " + clazz.getSimpleName());
+	private Optional<Object> argumentCountIsParameterCount(Class<?> clazz, String[] args)
+			throws IllegalAccessException, InvocationTargetException, InstantiationException {
+		for (Constructor<?> ctor : clazz.getConstructors()) {
+			final Class<?>[] ctorParams = ctor.getParameterTypes();
+			if (ctorParams.length == args.length && noArryParameters(ctorParams, ctorParams.length)) {
+				Object obj = correctTypesAndCallConstructor(clazz, args, ctorParams);
+				if (obj != null) {
+					return Optional.of(obj);
+				}
+			}
+		}
+		return Optional.empty();
 	}
 
 	private boolean noArryParameters(Class<?>[] ctorParams, int max) {
@@ -53,7 +70,7 @@ public class ConstructorHelper {
 			try {
 				return ConstructorUtils.invokeConstructor(clazz, oargs);
 			} catch (NoSuchMethodException e) {
-				throw new TestdatenException("No Constructor found in " + clazz.getSimpleName(), e);
+				throw new TestdataException("No Constructor found in " + clazz.getSimpleName(), e);
 			}
 		}
 		return null;
@@ -115,7 +132,7 @@ public class ConstructorHelper {
 			try {
 				oargs[tn] = Thread.currentThread().getContextClassLoader().loadClass(s);
 			} catch (ClassNotFoundException e) {
-				throw new TestdatenException("Can not load Class " + s, e);
+				throw new TestdataException("Can not load Class " + s, e);
 			}
 			break;
 

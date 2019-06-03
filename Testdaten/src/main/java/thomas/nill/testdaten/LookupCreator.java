@@ -1,14 +1,14 @@
 package thomas.nill.testdaten;
 
 import lombok.extern.slf4j.Slf4j;
-import thomas.nill.testdaten.basis.TestdatenException;
+import thomas.nill.testdaten.basis.TestdataException;
 import thomas.nill.testdaten.basis.ValueCreator;
 import thomas.nill.testdaten.basis.Values;
-import thomas.nill.testdaten.random.HasVerteilung;
-import thomas.nill.testdaten.random.Verteilung;
+import thomas.nill.testdaten.random.Distribution;
+import thomas.nill.testdaten.random.HasDistribution;
 
 @Slf4j
-public class LookupCreator<K> implements ValueCreator<K>, HasVerteilung {
+public class LookupCreator<K> implements ValueCreator<K>, HasDistribution {
 	private String key;
 	private ValueCreator<K> creator;
 
@@ -34,12 +34,12 @@ public class LookupCreator<K> implements ValueCreator<K>, HasVerteilung {
 	}
 
 	@Override
-	public void setVerteilung(Verteilung verteilung) {
-		if (creator instanceof HasVerteilung) {
-			((HasVerteilung) creator).setVerteilung(verteilung);
+	public void setVerteilung(Distribution distribution) {
+		if (creator instanceof HasDistribution) {
+			((HasDistribution) creator).setVerteilung(distribution);
 		} else {
-			throw new TestdatenException("Class " + creator.getClass().getSimpleName() + " does not implement "
-					+ HasVerteilung.class.getSimpleName());
+			throw new TestdataException("Class " + creator.getClass().getSimpleName() + " does not implement "
+					+ HasDistribution.class.getSimpleName());
 		}
 	}
 

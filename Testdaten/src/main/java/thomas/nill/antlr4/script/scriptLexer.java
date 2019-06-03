@@ -2,14 +2,14 @@
 
     package thomas.nill.antlr4.script;
 
-import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
-import org.antlr.v4.runtime.Token;
-import org.antlr.v4.runtime.TokenStream;
-import org.antlr.v4.runtime.*;
-import org.antlr.v4.runtime.atn.*;
+import org.antlr.v4.runtime.Lexer;
+import org.antlr.v4.runtime.RuleContext;
+import org.antlr.v4.runtime.atn.ATN;
+import org.antlr.v4.runtime.atn.ATNSimulator;
+import org.antlr.v4.runtime.atn.LexerATNSimulator;
+import org.antlr.v4.runtime.atn.PredictionContextCache;
 import org.antlr.v4.runtime.dfa.DFA;
-import org.antlr.v4.runtime.misc.*;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
 public class scriptLexer extends Lexer {
@@ -72,7 +72,7 @@ public class scriptLexer extends Lexer {
 		"\61\n\13\r\13\16\13\62\3\13\3\13\2\f\3\3\1\5\4\1\7\5\1\t\6\1\13\7\1\r"+
 		"\b\1\17\t\1\21\n\1\23\13\1\25\f\2\3\2\5\16\60\60\62;C\\aac|\u00c6\u00c6"+
 		"\u00d8\u00d8\u00de\u00de\u00e1\u00e1\u00e6\u00e6\u00f8\u00f8\u00fe\u00fe"+
-		"\6\"#..==BB\4\13\f\17\178\2\3\3\2\2\2\2\5\3\2\2\2\2\7\3\2\2\2\2\t\3\2"+
+		"\6\"#./==BB\4\13\f\17\178\2\3\3\2\2\2\2\5\3\2\2\2\2\7\3\2\2\2\2\t\3\2"+
 		"\2\2\2\13\3\2\2\2\2\r\3\2\2\2\2\17\3\2\2\2\2\21\3\2\2\2\2\23\3\2\2\2\2"+
 		"\25\3\2\2\2\3\27\3\2\2\2\5\31\3\2\2\2\7\33\3\2\2\2\t\35\3\2\2\2\13\37"+
 		"\3\2\2\2\r!\3\2\2\2\17#\3\2\2\2\21&\3\2\2\2\23+\3\2\2\2\25\60\3\2\2\2"+

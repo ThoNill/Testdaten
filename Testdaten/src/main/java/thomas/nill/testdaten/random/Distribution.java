@@ -1,11 +1,11 @@
 package thomas.nill.testdaten.random;
 
-public abstract class Verteilung {
+public abstract class Distribution {
 	protected int grenze = 10;
 
-	public Verteilung(int grenze) {
-		if (grenze <= 0) {
-			throw new IllegalArgumentException("Grenze sollte > 0 sein");
+	public Distribution(int grenze) {
+		if (grenze < 0) {
+			throw new IllegalArgumentException("Grenze sollte >= 0 sein");
 		}
 		this.grenze = grenze;
 	}

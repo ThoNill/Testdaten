@@ -4,9 +4,8 @@
 
 
 import org.antlr.v4.runtime.ParserRuleContext;
-import org.antlr.v4.runtime.Token;
-import org.antlr.v4.runtime.tree.TerminalNode;
 import org.antlr.v4.runtime.tree.ErrorNode;
+import org.antlr.v4.runtime.tree.TerminalNode;
 
 public class scriptBaseListener implements scriptListener {
 	@Override public void enterSentence(scriptParser.SentenceContext ctx) { }
