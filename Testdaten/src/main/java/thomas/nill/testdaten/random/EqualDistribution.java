@@ -4,6 +4,10 @@ public class EqualDistribution extends Distribution{
 
 	public EqualDistribution(int max) {
 		super(max);
+		if (max<0) {
+    		throw new IllegalArgumentException("max > 0 not " + max);
+    	}
+    
 	}
 
 	@Override

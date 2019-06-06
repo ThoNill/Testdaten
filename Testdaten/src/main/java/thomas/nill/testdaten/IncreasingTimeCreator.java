@@ -15,7 +15,10 @@ import thomas.nill.testdaten.basis.Values;
 
 public class IncreasingTimeCreator extends TimeSerie implements ValueCreator<LocalDateTime>{
 	public IncreasingTimeCreator(int count,int maxStep,@NonNull String unitName) {
-    	super(count,maxStep-1,unitName);
+    	super(maxStep-1,unitName);
+    	if (count<0) {
+    		throw new IllegalArgumentException("count > 0 not " + count);
+    	}
     	time = LocalDateTime.now().minus(count * maxStep,unit);
     }
 

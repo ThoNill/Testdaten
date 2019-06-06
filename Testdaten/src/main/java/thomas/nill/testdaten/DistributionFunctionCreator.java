@@ -27,6 +27,9 @@ public class DistributionFunctionCreator implements ValueCreator<Distribution> {
 	
 	public DistributionFunctionCreator(@NonNull Class<?> clazz, int max,@NonNull String[] args) {
 		super();
+		if (max<1) {
+    		throw new IllegalArgumentException("max > 0 not " + max);
+    	}
 		try {
 			Object obj = new ConstructorHelper().searchConstructorAndCreate(clazz, args);
 			if (!(obj instanceof Function<?,?>)) {

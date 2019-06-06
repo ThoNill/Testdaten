@@ -13,8 +13,13 @@ public class TimeSerie implements HasDistribution{
 	protected LocalDateTime time;
 	protected ChronoUnit unit;
 
-	public TimeSerie(int count,int maxStep,@NonNull String unitName) {
+	public TimeSerie(int maxStep,@NonNull String unitName) {
     	super();
+    	if (maxStep<1) {
+    		throw new IllegalArgumentException("maxStep > 0 not " + maxStep);
+    	}
+    
+	
     	this.unit = ChronoUnit.valueOf(unitName);
     	this.timeStep = new RangeCreator(maxStep);
     }

@@ -20,6 +20,9 @@ public class FutureDateCreator implements ValueCreator<LocalDate>, HasDistributi
 	
     public FutureDateCreator(int daysInTheFuture) {
     	super();
+    	if (daysInTheFuture<1) {
+    		throw new IllegalArgumentException("daysInTheFuture > 0 not " + daysInTheFuture);
+    	}
     	this.daysInTheFuture = new RangeCreator(daysInTheFuture-1);
     }
 

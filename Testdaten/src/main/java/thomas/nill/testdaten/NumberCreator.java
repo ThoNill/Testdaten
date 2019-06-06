@@ -15,6 +15,10 @@ public class NumberCreator implements ValueCreator<String> {
     public NumberCreator(int length) {
         super();    
         this.length = length;
+    	if (length<0) {
+    		throw new IllegalArgumentException("length > 0 not " + length);
+    	}
+    
         this.bereich = new RangeCreator(9);
     }
 

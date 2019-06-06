@@ -20,6 +20,12 @@ public class DateCreator extends MonthAndDay implements ValueCreator<LocalDate>,
     private int startYear;
     
     public DateCreator(int startYear,int endYear) {
+    	if (startYear<0) {
+    		throw new IllegalArgumentException("startYear > 0 not " + startYear);
+    	}
+    	if (endYear<0) {
+    		throw new IllegalArgumentException("endtYear > 0 not " + endYear);
+    	}
     	if (endYear< startYear) {
     		throw new IllegalArgumentException("the endYear " + endYear + " is smaler then the startYear "+startYear);
     	}

@@ -17,7 +17,11 @@ import thomas.nill.testdaten.basis.Values;
 public class DecreasingTimeCreator extends TimeSerie implements ValueCreator<LocalDateTime> {
 
 	public DecreasingTimeCreator(int count, int maxStep, String unitName) {
-		super(count, maxStep-1, unitName);
+		super(maxStep-1, unitName);
+		if (count<0) {
+    		throw new IllegalArgumentException("count > 0 not " + count);
+    	}
+    
 		time = LocalDateTime.now();
 	}
 

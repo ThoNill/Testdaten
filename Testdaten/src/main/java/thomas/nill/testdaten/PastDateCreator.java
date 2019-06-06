@@ -20,6 +20,10 @@ public class PastDateCreator implements ValueCreator<LocalDate>, HasDistribution
 	
     public PastDateCreator(int daysInThePast) {
     	super();
+    	if (daysInThePast<1) {
+    		throw new IllegalArgumentException("daysInThePast >= 1 not " + daysInThePast);
+    	}
+    
     	this.daysInThePast = new RangeCreator(daysInThePast-1);
     }
 

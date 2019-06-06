@@ -27,6 +27,13 @@ public class BirthdayCreator extends MonthAndDay implements ValueCreator<LocalDa
     
     public BirthdayCreator(int startAge,int endAge) {
     	super();
+    	if (startAge<0) {
+    		throw new IllegalArgumentException("startAge > 0 not " + startAge);
+    	}
+    	if (endAge<0) {
+    		throw new IllegalArgumentException("endtAge > 0 not " + endAge);
+    	}
+    
     	if (endAge< startAge) {
     		throw new IllegalArgumentException("the endAge " + endAge + " is smaler then the startAge "+startAge);
     	}
