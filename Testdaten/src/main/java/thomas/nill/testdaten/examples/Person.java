@@ -1,8 +1,6 @@
 package thomas.nill.testdaten.examples;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 import lombok.Data;
 import lombok.ToString;

@@ -36,7 +36,6 @@ import thomas.nill.testdaten.basis.ValueCreatorFabrik;
 import thomas.nill.testdaten.basis.Values;
 import thomas.nill.testdaten.examples.Person;
 import thomas.nill.testdaten.random.ArrayDistribution;
-import thomas.nill.testdaten.random.GauﬂDistribution;
 
 @Slf4j(topic = "test")
 public class CreatorTest {
