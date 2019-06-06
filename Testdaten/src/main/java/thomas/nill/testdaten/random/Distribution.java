@@ -10,7 +10,7 @@ public abstract class Distribution {
 
 	public Distribution(int max) {
 		if (max < 0) {
-			throw new IllegalArgumentException("Grenze sollte >= 0 sein");
+			throw new IllegalArgumentException("Maximum schould be >= 0");
 		}
 		this.max = max;
 	}

@@ -2,8 +2,8 @@ package thomas.nill.testdaten.random;
 
 public class EqualDistribution extends Distribution{
 
-	public EqualDistribution(int grenze) {
-		super(grenze);
+	public EqualDistribution(int max) {
+		super(max);
 	}
 
 	@Override

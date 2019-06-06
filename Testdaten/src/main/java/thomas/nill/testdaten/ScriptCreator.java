@@ -7,6 +7,7 @@ import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
+import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import thomas.nill.antlr4.script.scriptBaseVisitor;
 import thomas.nill.antlr4.script.scriptLexer;
@@ -75,14 +76,14 @@ public class ScriptCreator extends scriptBaseVisitor<Object> implements ValueCre
 	private ValueCreator<?> delegateValueCreator;
 	private String expression;
 
-	public ScriptCreator(String name,String expression,ResourceCreatorFabric fabric) {
+	public ScriptCreator(@NonNull String name,@NonNull String expression,@NonNull ResourceCreatorFabric fabric) {
 		super();
 		this.fabric = fabric;
 	
 		this.expression = expression;
 	}
 
-	public Object auswerten(String expression) {
+	public Object auswerten(@NonNull String expression) {
 		if (values == null) {
 			values = new Values();
 		};
@@ -93,7 +94,7 @@ public class ScriptCreator extends scriptBaseVisitor<Object> implements ValueCre
 	}
 	
 	@Override
-	public Object generateValue(Values v) {
+	public Object generateValue(@NonNull Values v) {
 		values = v;
 		return auswerten(expression);
 	}

@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import org.apache.commons.beanutils.ConstructorUtils;
 
+import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -18,7 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ConstructorHelper {
 
-	public Object searchConstructorAndCreate(Class<?> clazz, String[] args)
+	public Object searchConstructorAndCreate(@NonNull Class<?> clazz,@NonNull  String[] args)
 			throws InstantiationException, IllegalAccessException, InvocationTargetException {
 		Optional<Object> opt = argumentCountIsParameterCount(clazz, args);
 		if (opt.isEmpty()) {

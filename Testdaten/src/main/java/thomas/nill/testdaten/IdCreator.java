@@ -1,5 +1,6 @@
 package thomas.nill.testdaten;
 
+import lombok.NonNull;
 import thomas.nill.testdaten.basis.ValueCreator;
 import thomas.nill.testdaten.basis.Values;
 
@@ -17,7 +18,7 @@ public class IdCreator implements ValueCreator<Long> {
     }
     
     @Override
-    public Long generateValue(Values values) {
+    public Long generateValue(@NonNull Values values) {
         return Long.valueOf(id++);
     }
 

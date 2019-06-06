@@ -1,5 +1,6 @@
 package thomas.nill.testdaten;
 
+import lombok.NonNull;
 import thomas.nill.testdaten.basis.ValueCreator;
 import thomas.nill.testdaten.basis.Values;
 /**
@@ -19,7 +20,7 @@ public class NumberCreator implements ValueCreator<String> {
 
     
     @Override
-    public String generateValue(Values values) {
+    public String generateValue(@NonNull Values values) {
         StringBuilder builder = new StringBuilder(length);
         for(int i=0;i<length;i++) {
             builder.append(bereich.generateValue(values));

@@ -2,6 +2,7 @@ package thomas.nill.testdaten;
 
 import java.time.LocalDate;
 
+import lombok.NonNull;
 import thomas.nill.testdaten.basis.ValueCreator;
 import thomas.nill.testdaten.basis.Values;
 import thomas.nill.testdaten.random.Distribution;
@@ -34,7 +35,7 @@ public class BirthdayCreator extends MonthAndDay implements ValueCreator<LocalDa
     }
 
     @Override
-    public LocalDate generateValue(Values values) {
+    public LocalDate generateValue(@NonNull Values values) {
     	int actualYear = LocalDate.now().getYear();
         int year = actualYear - (startAge + yearGenerator.generateValue(values));
         return extendYearToDate(values, year);

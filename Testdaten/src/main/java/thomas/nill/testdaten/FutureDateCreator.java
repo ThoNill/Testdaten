@@ -2,6 +2,7 @@ package thomas.nill.testdaten;
 
 import java.time.LocalDate;
 
+import lombok.NonNull;
 import thomas.nill.testdaten.basis.ValueCreator;
 import thomas.nill.testdaten.basis.Values;
 import thomas.nill.testdaten.random.Distribution;
@@ -23,12 +24,12 @@ public class FutureDateCreator implements ValueCreator<LocalDate>, HasDistributi
     }
 
     @Override
-    public LocalDate generateValue(Values values) {
+    public LocalDate generateValue(@NonNull Values values) {
     	return LocalDate.now().plusDays(1+daysInTheFuture.generateValue(values));
     }
 
 	@Override
-	public void setDistribution(Distribution distribution) {
+	public void setDistribution(@NonNull Distribution distribution) {
 		daysInTheFuture.setDistribution(distribution);
 	}
 

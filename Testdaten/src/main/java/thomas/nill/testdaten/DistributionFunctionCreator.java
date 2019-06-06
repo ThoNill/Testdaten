@@ -3,6 +3,7 @@ package thomas.nill.testdaten;
 import java.lang.reflect.InvocationTargetException;
 import java.util.function.Function;
 
+import lombok.NonNull;
 import thomas.nill.testdaten.basis.ConstructorHelper;
 import thomas.nill.testdaten.basis.TestdataException;
 import thomas.nill.testdaten.basis.ValueCreator;
@@ -24,7 +25,7 @@ public class DistributionFunctionCreator implements ValueCreator<Distribution> {
 
 
 	
-	public DistributionFunctionCreator(Class<?> clazz, int max,String[] args) {
+	public DistributionFunctionCreator(@NonNull Class<?> clazz, int max,@NonNull String[] args) {
 		super();
 		try {
 			Object obj = new ConstructorHelper().searchConstructorAndCreate(clazz, args);
@@ -41,7 +42,7 @@ public class DistributionFunctionCreator implements ValueCreator<Distribution> {
 	}
 
 	@Override
-	public Distribution generateValue(Values v) {
+	public Distribution generateValue(@NonNull Values v) {
 		return distribution;
 	}
 

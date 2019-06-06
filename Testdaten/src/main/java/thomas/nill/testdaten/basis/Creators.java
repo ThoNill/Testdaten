@@ -2,6 +2,7 @@ package thomas.nill.testdaten.basis;
 
 import java.util.HashMap;
 
+import lombok.NonNull;
 import thomas.nill.testdaten.ResourceCreatorFabric;
 
 /**
@@ -19,11 +20,11 @@ public class Creators {
 		super();
 	}
 
-	public ValueCreator<?> get(String key) {
+	public ValueCreator<?> get(@NonNull String key) {
 		return values.get(key);
 	}
 
-	public Object put(String key, ValueCreator<?> value) {
+	public Object put(@NonNull String key, @NonNull ValueCreator<?> value) {
 		return values.put(key, value);
 	}
 
@@ -33,7 +34,7 @@ public class Creators {
 	 * @param v Values Map
 	 * @return generated value
 	 */
-	public Object generateNewFieldValue(Values v) {
+	public Object generateNewFieldValue(@NonNull Values v) {
 		for (String key : values.keySet()) {
 			generateNewFieldValue(key, v);
 		}

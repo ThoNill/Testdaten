@@ -1,4 +1,7 @@
 package thomas.nill.testdaten.basis;
+
+import lombok.NonNull;
+
 /**
  * Runtime Exception for this Testdata creation library.
  * 
@@ -12,19 +15,19 @@ public class TestdataException extends RuntimeException{
 		super();
 	}
 
-	public TestdataException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+	public TestdataException(@NonNull String message, @NonNull Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
 		super(message, cause, enableSuppression, writableStackTrace);
 	}
 
-	public TestdataException(String message, Throwable cause) {
+	public TestdataException(@NonNull String message, @NonNull Throwable cause) {
 		super(message, cause);
 	}
 
-	public TestdataException(String message) {
+	public TestdataException(@NonNull String message) {
 		super(message);
 	}
 
-	public TestdataException(Throwable cause) {
+	public TestdataException(@NonNull Throwable cause) {
 		super(cause);
 	}
 

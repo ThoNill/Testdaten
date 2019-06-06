@@ -1,7 +1,7 @@
 package thomas.nill.testdaten.random;
 
 import java.util.function.Function;
-
+import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 
 
@@ -12,19 +12,24 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 public class ArrayDistribution extends Distribution {
-	double[] kummuliert;
+	private double[] kummulated;
 	
-	public ArrayDistribution(Double[] probDistribution) {
+	public ArrayDistribution(@NonNull Double[] probDistribution) {
 		super(probDistribution.length);
 		addTheProbabilities(probDistribution);
 	}
 
-	public ArrayDistribution(int max,Function<Integer,Double> distribution) {
+	public ArrayDistribution(int max,@NonNull Function<Integer,Double> distribution) {
 		super(max);
 		Double[] prob = new Double[max];
 		double sum = initArrayWithFunction(distribution, prob);
 		normTheFunction(prob, sum);
 		addTheProbabilities(prob);
+	}
+
+	@Override
+	public int randomNumberLowerOrEqualsThenMax() {
+		return binSeach(0, max, Math.random());
 	}
 
 	private double initArrayWithFunction(Function<Integer, Double> distribution, Double[] prob) {
@@ -51,37 +56,33 @@ public class ArrayDistribution extends Distribution {
 	}
 
 	
-	private void addTheProbabilities(Double[] wahrscheinlichkeit) {
-		kummuliert = new double[wahrscheinlichkeit.length];
-		kummuliert[0] = wahrscheinlichkeit[0];
-		for(int i=1;i< wahrscheinlichkeit.length;i++) {
-			if (wahrscheinlichkeit[i]<0.0) {
+	private void addTheProbabilities(Double[] prob) {
+		kummulated = new double[prob.length];
+		kummulated[0] = prob[0];
+		for(int i=1;i< prob.length;i++) {
+			if (prob[i]<0.0) {
 				throw new IllegalArgumentException("Wahrscheinlichkeit sollte >= 0.0 sein");
 			}
-			kummuliert[i] = kummuliert[i-1] + wahrscheinlichkeit[i]; 
+			kummulated[i] = kummulated[i-1] + prob[i]; 
 		}
-		if (kummuliert[kummuliert.length-1] > 1.0001) {
-			throw new IllegalArgumentException("Summe der Wahrscheinlichkeiten sollte <= 1.0 sein ist aber "+kummuliert[kummuliert.length-1] );
+		if (kummulated[kummulated.length-1] > 1.0001) {
+			throw new IllegalArgumentException("Summe der Wahrscheinlichkeiten sollte <= 1.0 sein ist aber "+kummulated[kummulated.length-1] );
 		}
 	}
 
-	@Override
-	public int randomNumberLowerOrEqualsThenMax() {
-		return binSeach(0, max, Math.random());
-	}
 	
-	public int binSeach(int start,int end,double w) {
+	private int binSeach(int start,int end,double w) {
 		assert start >=0 && end>=0;
 		log.debug("start="+start + " end= " + end);
 		if (start == end || start == end-1) {
-			double wertInMitte = kummuliert[start];
+			double wertInMitte = kummulated[start];
 			if (wertInMitte < w) {
 				return end;
 			}
 			return start;
 		}
 		int mitte = calculateMiddle(start, end);
-		double wertInMitte = kummuliert[mitte];
+		double wertInMitte = kummulated[mitte];
 		log.debug("mitte= " + mitte + " wertInMitte= "+wertInMitte + " w= " + w);
 		
 		if (wertInMitte < w) {

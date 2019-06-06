@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import thomas.nill.testdaten.basis.Creators;
 import thomas.nill.testdaten.basis.TestdataException;
@@ -28,17 +29,17 @@ public class ResourceCreatorFabric implements ValueCreatorFabrik {
 	private Creators creators = new Creators();
 
 	// testwords
-	public ResourceCreatorFabric(String name) {
+	public ResourceCreatorFabric(@NonNull String name) {
 		this(name, Locale.getDefault());
 	}
 
-	public ResourceCreatorFabric(String name, Locale locale) {
+	public ResourceCreatorFabric(@NonNull String name, @NonNull Locale locale) {
 		labels = ResourceBundle.getBundle(name, locale);
 		initDistributions(new Values());
 	}
 
 	@Override
-	public ValueCreator<?> searchCreator(String name) {
+	public ValueCreator<?> searchCreator(@NonNull String name) {
 		log.debug("Suche nach name= <" + name + ">");
 		ValueCreator<?> c = creators.get(name);
 		if (c == null) {
@@ -53,7 +54,7 @@ public class ResourceCreatorFabric implements ValueCreatorFabrik {
 		return c;
 	}
 
-	private ValueCreator<?> createCreator(String name, String text) {
+	private ValueCreator<?> createCreator(@NonNull String name, @NonNull String text) {
 		if (text.contains("{") || text.contains("(") || text.contains("[") || text.contains("}") || text.contains(")")
 				|| text.contains("]")) {
 			if (text.contains("|")) {
@@ -70,7 +71,7 @@ public class ResourceCreatorFabric implements ValueCreatorFabrik {
 		return new LookupCreator<String>(name, new StringListCreator(text));
 	}
 
-	public Values getValues(Values values) {
+	public Values getValues(@NonNull Values values) {
 		generateValues(values);
 		return values;
 	}

@@ -2,6 +2,7 @@ package thomas.nill.testdaten;
 
 import java.time.LocalDate;
 
+import lombok.NonNull;
 import thomas.nill.testdaten.basis.ValueCreator;
 import thomas.nill.testdaten.basis.Values;
 import thomas.nill.testdaten.random.Distribution;
@@ -27,13 +28,13 @@ public class DateCreator extends MonthAndDay implements ValueCreator<LocalDate>,
     }
 
     @Override
-    public LocalDate generateValue(Values values) {
+    public LocalDate generateValue(@NonNull Values values) {
         int year = startYear + yearGenerator.generateValue(values);
         return extendYearToDate(values, year);
     }
 
 	@Override
-	public void setDistribution(Distribution distribution) {
+	public void setDistribution(@NonNull Distribution distribution) {
 		yearGenerator.setDistribution(distribution);
 	}
 

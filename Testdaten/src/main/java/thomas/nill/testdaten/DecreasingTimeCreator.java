@@ -2,6 +2,7 @@ package thomas.nill.testdaten;
 
 import java.time.LocalDateTime;
 
+import lombok.NonNull;
 import thomas.nill.testdaten.basis.ValueCreator;
 import thomas.nill.testdaten.basis.Values;
 
@@ -21,7 +22,7 @@ public class DecreasingTimeCreator extends TimeSerie implements ValueCreator<Loc
 	}
 
 	@Override
-	public LocalDateTime generateValue(Values values) {
+	public LocalDateTime generateValue(@NonNull Values values) {
 		return replaceNewValue(time.minus(1+timeStep.generateValue(values), unit));
 	}
 

@@ -1,5 +1,6 @@
 package thomas.nill.testdaten;
 
+import lombok.NonNull;
 import thomas.nill.testdaten.basis.ValueCreator;
 import thomas.nill.testdaten.basis.Values;
 import thomas.nill.testdaten.random.Distribution;
@@ -15,7 +16,7 @@ import thomas.nill.testdaten.random.HasDistribution;
 public class RangeCreator implements ValueCreator<Integer>, HasDistribution {
     private Distribution distribution;
     
-	public RangeCreator(Distribution distribution) {
+	public RangeCreator(@NonNull Distribution distribution) {
 		super();
 		this.distribution = distribution;
 	}
@@ -29,12 +30,12 @@ public class RangeCreator implements ValueCreator<Integer>, HasDistribution {
  
 
     @Override
-    public Integer generateValue(Values values) {
+    public Integer generateValue(@NonNull Values values) {
         return Integer.valueOf(distribution.randomNumberLowerOrEqualsThenMax());
      }
 
     @Override
-	public void setDistribution(Distribution distribution) {
+	public void setDistribution(@NonNull Distribution distribution) {
     	this.distribution = distribution;
     }
 

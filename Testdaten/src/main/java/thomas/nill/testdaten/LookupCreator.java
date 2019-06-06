@@ -1,5 +1,6 @@
 package thomas.nill.testdaten;
 
+import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import thomas.nill.testdaten.basis.TestdataException;
 import thomas.nill.testdaten.basis.ValueCreator;
@@ -23,14 +24,14 @@ public class LookupCreator<K> implements ValueCreator<K>, HasDistribution {
 	private String key;
 	private ValueCreator<K> creator;
 
-	public LookupCreator(String key, ValueCreator<K> creator) {
+	public LookupCreator(@NonNull String key, @NonNull ValueCreator<K> creator) {
 		super();
 		this.key = key;
 		this.creator = creator;
 	}
 
 	@Override
-	public K generateValue(Values v) {
+	public K generateValue(@NonNull Values v) {
 		log.debug("Suche nach name= <" + key + "> in " + v);
 		Object o = v.get(key);
 		if (o != null) {
@@ -45,7 +46,7 @@ public class LookupCreator<K> implements ValueCreator<K>, HasDistribution {
 	}
 
 	@Override
-	public void setDistribution(Distribution distribution) {
+	public void setDistribution(@NonNull Distribution distribution) {
 		if (creator instanceof HasDistribution) {
 			((HasDistribution) creator).setDistribution(distribution);
 		} else {

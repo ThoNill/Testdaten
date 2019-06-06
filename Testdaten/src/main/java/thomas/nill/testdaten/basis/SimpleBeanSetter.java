@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.MethodUtils;
+
+import lombok.NonNull;
 /**
  * The SimpleBeanSetter is a implementation of {@link BeanSetter}
  * @author tnill
@@ -19,7 +21,7 @@ public class SimpleBeanSetter implements BeanSetter {
 	}
 
 	@Override
-	public void updateValues(Object object, Values values) {
+	public void updateValues(@NonNull Object object, @NonNull Values values) {
 		try {
 			// For the java beans standard, use BeanUtils
 			BeanUtils.populate(object, values.getValues());
