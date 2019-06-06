@@ -8,5 +8,5 @@ import thomas.nill.testdaten.basis.ValueCreator;
  *
  */
 public interface HasDistribution {
-	void setVerteilung(Distribution distribution);
+	void setDistribution(Distribution distribution);
 }

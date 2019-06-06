@@ -12,7 +12,7 @@ import thomas.nill.testdaten.random.HasDistribution;
  * 
  * @author tnill
  *
- * @param <K>
+ * 
  */
 public class SwitchCreator<K> implements ValueCreator<K>, HasDistribution {
 	private List<ValueCreator<K>> liste;
@@ -30,8 +30,10 @@ public class SwitchCreator<K> implements ValueCreator<K>, HasDistribution {
 	}
 
 	@Override
-	public void setVerteilung(Distribution distribution) {
-		bereich.setVerteilung(distribution);
+	public void setDistribution(Distribution distribution) {
+		bereich.setDistribution(distribution);
 	}
+
+
 
 }

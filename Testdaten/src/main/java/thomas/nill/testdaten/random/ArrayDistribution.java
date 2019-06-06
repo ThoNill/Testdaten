@@ -71,6 +71,7 @@ public class ArrayDistribution extends Distribution {
 	}
 	
 	public int binSeach(int start,int end,double w) {
+		assert start >=0 && end>=0;
 		log.debug("start="+start + " end= " + end);
 		if (start == end || start == end-1) {
 			double wertInMitte = kummuliert[start];
@@ -91,8 +92,9 @@ public class ArrayDistribution extends Distribution {
 	}
 
 	private int calculateMiddle(int start, int end) {
+		assert start >=0 && end>=0;
 		int mitte = start+end;
-		if( mitte % 2 == 1 ) {
+		if( mitte >= 0 && mitte % 2 == 1 ) {
 			mitte--;
 		}
 		mitte = mitte /2;

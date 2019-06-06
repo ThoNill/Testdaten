@@ -16,7 +16,7 @@ import thomas.nill.testdaten.random.HasDistribution;
  * If the value ist already created this Creator uses always the same value
  * from the map.
  * 
- * @param <K>
+ * 
  */
 @Slf4j
 public class LookupCreator<K> implements ValueCreator<K>, HasDistribution {
@@ -45,13 +45,15 @@ public class LookupCreator<K> implements ValueCreator<K>, HasDistribution {
 	}
 
 	@Override
-	public void setVerteilung(Distribution distribution) {
+	public void setDistribution(Distribution distribution) {
 		if (creator instanceof HasDistribution) {
-			((HasDistribution) creator).setVerteilung(distribution);
+			((HasDistribution) creator).setDistribution(distribution);
 		} else {
 			throw new TestdataException("Class " + creator.getClass().getSimpleName() + " does not implement "
 					+ HasDistribution.class.getSimpleName());
 		}
 	}
+
+
 
 }

@@ -4,6 +4,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -12,10 +15,16 @@ import org.junit.Test;
 
 import lombok.extern.slf4j.Slf4j;
 import thomas.nill.testdaten.BeanCreator;
+import thomas.nill.testdaten.BirthdayCreator;
 import thomas.nill.testdaten.ConstantCreator;
+import thomas.nill.testdaten.DateCreator;
+import thomas.nill.testdaten.DecreasingTimeCreator;
+import thomas.nill.testdaten.FutureDateCreator;
 import thomas.nill.testdaten.IdCreator;
+import thomas.nill.testdaten.IncreasingTimeCreator;
 import thomas.nill.testdaten.LookupCreator;
 import thomas.nill.testdaten.NumberCreator;
+import thomas.nill.testdaten.PastDateCreator;
 import thomas.nill.testdaten.RangeCreator;
 import thomas.nill.testdaten.ResourceCreatorFabric;
 import thomas.nill.testdaten.ScriptCreator;
@@ -225,6 +234,83 @@ public class CreatorTest {
 		Pattern p = Pattern.compile("[A-Za-zƒ÷‹‰ˆ¸ﬂ]+ +[0-9]+");
 		Matcher m = p.matcher(street);
 		assertTrue(m.matches());
+	}
+
+	@Test
+	public void testIncreasingTimeCreator() {
+		IncreasingTimeCreator c = new IncreasingTimeCreator(10, 10, ChronoUnit.MINUTES.name());
+		Values v = new Values();
+		LocalDateTime t1 = c.generateValue(v);
+		LocalDateTime now = LocalDateTime.now();
+		for (int i = 0; i < 10; i++) {
+			assertTrue(now.isAfter(t1));
+			LocalDateTime t2 = c.generateValue(v);
+			assertTrue(t2.isAfter(t1));
+			t1 = t2;
+		}
+
+	}
+
+	@Test
+	public void testDecreasingTimeCreator() {
+		DecreasingTimeCreator c = new DecreasingTimeCreator(10, 10, ChronoUnit.MINUTES.name());
+		Values v = new Values();
+		LocalDateTime t1 = c.generateValue(v);
+		LocalDateTime now = LocalDateTime.now();
+		for (int i = 0; i < 10; i++) {
+			assertTrue(now.isAfter(t1));
+			LocalDateTime t2 = c.generateValue(v);
+			assertTrue(t1.isAfter(t2));
+			t1 = t2;
+		}
+
+	}
+
+	@Test
+	public void testDateCreator() {
+		DateCreator c = new DateCreator(2000, 2018);
+		Values v = new Values();
+		for (int i = 0; i < 1000; i++) {
+			LocalDate t = c.generateValue(v);
+			assertTrue(t.getYear() >= 2000 && t.getYear() <= 2018);
+		}
+
+	}
+
+	@Test
+	public void testBirtdayCreator() {
+		BirthdayCreator c = new BirthdayCreator(20, 65);
+		Values v = new Values();
+		int actualYear = LocalDate.now().getYear();
+		for (int i = 0; i < 1000; i++) {
+			LocalDate t = c.generateValue(v);
+			assertTrue(actualYear - t.getYear() >= 20 && actualYear - t.getYear() <= 65);
+		}
+
+	}
+
+	@Test
+	public void testPastDateCreator() {
+		LocalDate now = LocalDate.now();
+		PastDateCreator c = new PastDateCreator(20);
+		Values v = new Values();
+		for (int i = 0; i < 1000; i++) {
+			LocalDate t = c.generateValue(v);
+			assertTrue(t.isBefore(now));
+		}
+
+	}
+
+	@Test
+	public void testFutureDateCreator() {
+		LocalDate now = LocalDate.now();
+		FutureDateCreator c = new FutureDateCreator(20);
+		Values v = new Values();
+		for (int i = 0; i < 1000; i++) {
+			LocalDate t = c.generateValue(v);
+			assertTrue(now.isBefore(t));
+		}
+
 	}
 
 }

@@ -1,7 +1,6 @@
 package thomas.nill.testdaten;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.Date;
 
 import thomas.nill.testdaten.basis.ConstructorHelper;
 import thomas.nill.testdaten.basis.TestdataException;
@@ -14,7 +13,7 @@ import thomas.nill.testdaten.random.Distribution;
  * 
  * @author tnill
  *
- * @param <K>
+ * 
  */
 
 public class DistributionCreator implements ValueCreator<Distribution> {
@@ -39,5 +38,6 @@ public class DistributionCreator implements ValueCreator<Distribution> {
 	public Distribution generateValue(Values v) {
 		return distribution;
 	}
+
 
 }

@@ -43,7 +43,7 @@ public class ResourceCreatorFabric implements ValueCreatorFabrik {
 		ValueCreator<?> c = creators.get(name);
 		if (c == null) {
 			log.debug("Suche nach name= <" + name + ">");
-			String text = (name.contains("{")) ? name : labels.getString(name);
+			final String text = (name.contains("{")) ? name : labels.getString(name);
 			c = createCreator(name, text);
 			creators.put(name, c);
 			log.debug("Setze name= <" + name + "> auf " + c.toString());
@@ -107,7 +107,7 @@ public class ResourceCreatorFabric implements ValueCreatorFabrik {
 						"Class " + obj.getClass().getSimpleName() + " is not a " + Distribution.class.getSimpleName());
 			}
 			Distribution distribution = (Distribution) obj;
-			((HasDistribution) c).setVerteilung(distribution);
+			((HasDistribution) c).setDistribution(distribution);
 		}
 	}
 

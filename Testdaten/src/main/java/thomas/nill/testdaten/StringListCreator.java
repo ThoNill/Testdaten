@@ -28,11 +28,12 @@ public class StringListCreator implements ValueCreator<String>, HasDistribution{
 	}
 
 	@Override
-	public void setVerteilung(Distribution distribution) {
+	public void setDistribution(Distribution distribution) {
 		if (texte.length < distribution.getMax()) {
 			throw new TestdataException("Anzahl der Texte " + (texte.length+1) + " passen nicht zur Distribution " + distribution.getMax());
 		}
-		bereich.setVerteilung(distribution);
+		bereich.setDistribution(distribution);
 	}
+
 
 }

@@ -30,8 +30,8 @@ public class Creators {
 	/**
 	 * Generate new values, eventually stored in {@link Values}
 	 * 
-	 * @param v
-	 * @return
+	 * @param v Values Map
+	 * @return generated value
 	 */
 	public Object generateNewFieldValue(Values v) {
 		for (String key : values.keySet()) {

@@ -8,7 +8,7 @@ import thomas.nill.testdaten.basis.Values;
  * 
  * @author tnill
  *
- * @param <K>
+ * 
  */
 
 public class ConstantCreator<K> implements ValueCreator<K>{

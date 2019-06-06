@@ -13,7 +13,7 @@ import thomas.nill.testdaten.basis.Values;
  * 
  * @author tnill
  *
- * @param <K>
+ * 
  */
 public class BeanCreator<K> implements ValueCreator<K> {
 	private Class<?> clazz;

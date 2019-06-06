@@ -6,9 +6,7 @@ import java.util.ResourceBundle;
 import org.junit.Test;
 
 import lombok.extern.slf4j.Slf4j;
-import thomas.nill.testdaten.BeanCreator;
 import thomas.nill.testdaten.ResourceCreatorFabric;
-import thomas.nill.testdaten.ScriptCreator;
 import thomas.nill.testdaten.basis.ValueCreator;
 import thomas.nill.testdaten.basis.ValueCreatorFabrik;
 import thomas.nill.testdaten.basis.Values;

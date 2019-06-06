@@ -34,9 +34,10 @@ public class RangeCreator implements ValueCreator<Integer>, HasDistribution {
      }
 
     @Override
-	public void setVerteilung(Distribution distribution) {
+	public void setDistribution(Distribution distribution) {
     	this.distribution = distribution;
     }
+
 
 
 }

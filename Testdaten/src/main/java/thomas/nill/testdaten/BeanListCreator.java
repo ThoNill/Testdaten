@@ -11,7 +11,7 @@ import thomas.nill.testdaten.basis.Values;
  * 
  * @author tnill
  *
- * @param <K>
+ * 
  */
 public class BeanListCreator<K>  implements ValueCreator<List<K>>{
 	private BeanCreator<K> creator;

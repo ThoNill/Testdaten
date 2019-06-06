@@ -16,7 +16,7 @@ import thomas.nill.testdaten.random.Distribution;
  * 
  * @author tnill
  *
- * @param <K>
+ * 
  */
 
 public class DistributionFunctionCreator implements ValueCreator<Distribution> {
@@ -44,5 +44,6 @@ public class DistributionFunctionCreator implements ValueCreator<Distribution> {
 	public Distribution generateValue(Values v) {
 		return distribution;
 	}
+
 
 }

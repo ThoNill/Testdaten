@@ -12,7 +12,7 @@ import thomas.nill.testdaten.LookupCreator;
  * 
  * The {@link LookupCreator} insert created Values in a {@link Values} map.
  * 
- * @param <K>
+ * 
  */
 @FunctionalInterface
 public interface ValueCreator<K> {
