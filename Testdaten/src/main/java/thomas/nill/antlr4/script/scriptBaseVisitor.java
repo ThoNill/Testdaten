@@ -3,6 +3,8 @@
     package thomas.nill.antlr4.script;
 
 import org.antlr.v4.runtime.tree.*;
+import org.antlr.v4.runtime.Token;
+import org.antlr.v4.runtime.ParserRuleContext;
 
 public class scriptBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements scriptVisitor<T> {
 	@Override public T visitSentence(scriptParser.SentenceContext ctx) { return visitChildren(ctx); }

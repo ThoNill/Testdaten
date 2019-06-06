@@ -19,6 +19,7 @@ import thomas.nill.testdaten.BirthdayCreator;
 import thomas.nill.testdaten.ConstantCreator;
 import thomas.nill.testdaten.DateCreator;
 import thomas.nill.testdaten.DecreasingTimeCreator;
+import thomas.nill.testdaten.DistributionCreator;
 import thomas.nill.testdaten.FutureDateCreator;
 import thomas.nill.testdaten.IdCreator;
 import thomas.nill.testdaten.IncreasingTimeCreator;
@@ -33,6 +34,8 @@ import thomas.nill.testdaten.SwitchCreator;
 import thomas.nill.testdaten.basis.ValueCreator;
 import thomas.nill.testdaten.basis.ValueCreatorFabrik;
 import thomas.nill.testdaten.basis.Values;
+import thomas.nill.testdaten.random.ArrayDistribution;
+import thomas.nill.testdaten.random.GauﬂDistribution;
 
 @Slf4j(topic = "test")
 public class CreatorTest {
@@ -311,6 +314,24 @@ public class CreatorTest {
 			assertTrue(now.isBefore(t));
 		}
 
+	}
+	@Test
+	public void testDistributionCreator() {
+		try {
+			new DistributionCreator(String.class,new String[] {});
+			fail("No Exception");
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}
+
+		try {
+			new DistributionCreator(ArrayDistribution.class,new String[] {"5","6","A"});
+			fail("No Exception");
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}
+
+		
 	}
 
 }

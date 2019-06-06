@@ -21,8 +21,8 @@ public class ConstructorHelper {
 	public Object searchConstructorAndCreate(Class<?> clazz, String[] args)
 			throws InstantiationException, IllegalAccessException, InvocationTargetException {
 		Optional<Object> opt = argumentCountIsParameterCount(clazz, args);
-		if(opt.isEmpty()) {
-			opt = lastArgumentIsArray(clazz, args);	
+		if (opt.isEmpty()) {
+			opt = lastArgumentIsArray(clazz, args);
 		}
 		if (opt.isPresent()) {
 			return opt.get();
@@ -101,10 +101,12 @@ public class ConstructorHelper {
 
 	private boolean convertToArray(Object[] oargs, final String[] args, final Class<?>[] ctorParams, int n) {
 		Object[] orest = (Object[]) Array.newInstance(ctorParams[n].getComponentType(), args.length - n);
-		return convertRestOfArgumentlistIntoArray(oargs, args, n,ctorParams[n].getComponentType().getSimpleName(),orest);
+		return convertRestOfArgumentlistIntoArray(oargs, args, n, ctorParams[n].getComponentType().getSimpleName(),
+				orest);
 	}
 
-	private boolean convertRestOfArgumentlistIntoArray(Object[] oargs, final String[] args, int n, final String className,Object[] orest) {
+	private boolean convertRestOfArgumentlistIntoArray(Object[] oargs, final String[] args, int n,
+			final String className, Object[] orest) {
 		int nArray = n;
 		for (int m = 0; m < orest.length; m++) {
 			if (!convert2Type(orest, m, args[nArray], className)) {
@@ -117,37 +119,37 @@ public class ConstructorHelper {
 	}
 
 	private boolean convert2Type(Object[] oargs, int tn, String s, String className) {
-		switch (className) {
-		case "int":
-		case "Integer":
-			oargs[tn] = Integer.valueOf(s);
-			break;
-		case "long":
-		case "Long":
-			oargs[tn] = Long.valueOf(s);
-			break;
-		case "float":
-		case "Float":
-			oargs[tn] = Float.valueOf(s);
-			break;
-		case "double":
-		case "Double":
-			oargs[tn] = Double.valueOf(s);
-			break;
-		case "Class":
-			try {
+		try {
+			switch (className) {
+			case "int":
+			case "Integer":
+				oargs[tn] = Integer.valueOf(s);
+				break;
+			case "long":
+			case "Long":
+				oargs[tn] = Long.valueOf(s);
+				break;
+			case "float":
+			case "Float":
+				oargs[tn] = Float.valueOf(s);
+				break;
+			case "double":
+			case "Double":
+				oargs[tn] = Double.valueOf(s);
+				break;
+			case "Class":
 				oargs[tn] = Thread.currentThread().getContextClassLoader().loadClass(s);
-			} catch (ClassNotFoundException e) {
-				throw new TestdataException("Can not load Class " + s, e);
-			}
-			break;
+				break;
 
-		case "String":
-			oargs[tn] = s;
-			break;
-		default:
-			log.debug("can not convert a String to Class " + className);
-			return false;
+			case "String":
+				oargs[tn] = s;
+				break;
+			default:
+				log.debug("can not convert a String to Class " + className);
+				return false;
+			}			
+		} catch (ClassNotFoundException e) {
+			throw new TestdataException("Can not load Class " + s, e);
 		}
 		return true;
 	}

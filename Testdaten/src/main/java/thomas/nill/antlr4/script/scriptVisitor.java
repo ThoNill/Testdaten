@@ -3,6 +3,7 @@
     package thomas.nill.antlr4.script;
 
 import org.antlr.v4.runtime.tree.*;
+import org.antlr.v4.runtime.Token;
 
 public interface scriptVisitor<T> extends ParseTreeVisitor<T> {
 	T visitSentence(scriptParser.SentenceContext ctx);
