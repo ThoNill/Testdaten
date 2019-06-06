@@ -30,6 +30,11 @@ public class BeanCreator<K> implements ValueCreator<K> {
 		this.setter = setter;
 		this.fabric = new ResourceCreatorFabric(clazz.getCanonicalName());
 	}
+	
+	public static <K> K create(Class<?> clazz) {
+		BeanCreator<K> bc = new BeanCreator<>(clazz);
+		return bc.generateValue(new Values());
+	}
 
 	@Override
 	public K generateValue(Values v) {

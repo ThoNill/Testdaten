@@ -34,6 +34,7 @@ import thomas.nill.testdaten.SwitchCreator;
 import thomas.nill.testdaten.basis.ValueCreator;
 import thomas.nill.testdaten.basis.ValueCreatorFabrik;
 import thomas.nill.testdaten.basis.Values;
+import thomas.nill.testdaten.examples.Person;
 import thomas.nill.testdaten.random.ArrayDistribution;
 import thomas.nill.testdaten.random.GauﬂDistribution;
 
@@ -204,16 +205,37 @@ public class CreatorTest {
 			log.debug(scriptCreator.auswerten(script).toString());
 			fail("i want a Exception");
 		} catch (Exception e) {
-			log.debug("Exception: " + e);
 		}
 	}
 
 	@Test
-	public void testBeanCreator() {
+	public void testBeanCreatorAdresse() {
 		BeanCreator<Adresse> bc = new BeanCreator<Adresse>(Adresse.class);
 		Adresse a = bc.generateValue(new Values());
 		log.debug(a.toString());
 	}
+
+	@Test
+	public void testBeanCreatorPerson() {
+		try {
+			BeanCreator<Person> bc = new BeanCreator<Person>(Person.class);
+			Person a = bc.generateValue(new Values());
+			log.debug(a.toString());
+		} catch (Exception ex) {
+
+		}
+	}
+	
+	@Test
+	public void testCreatePerson() {
+		try {
+			Person p = BeanCreator.create(Person.class);
+			log.debug(p.toString());
+		} catch (Exception ex) {
+
+		}
+	}
+
 
 	@Test
 	public void testPhoneCreator() {
@@ -315,23 +337,23 @@ public class CreatorTest {
 		}
 
 	}
+
 	@Test
 	public void testDistributionCreator() {
 		try {
-			new DistributionCreator(String.class,new String[] {});
+			new DistributionCreator(String.class, new String[] {});
 			fail("No Exception");
-		} catch(Exception ex) {
-			ex.printStackTrace();
+		} catch (Exception ex) {
+
 		}
 
 		try {
-			new DistributionCreator(ArrayDistribution.class,new String[] {"5","6","A"});
+			new DistributionCreator(ArrayDistribution.class, new String[] { "5", "6", "A" });
 			fail("No Exception");
-		} catch(Exception ex) {
-			ex.printStackTrace();
+		} catch (Exception ex) {
+
 		}
 
-		
 	}
 
 }
