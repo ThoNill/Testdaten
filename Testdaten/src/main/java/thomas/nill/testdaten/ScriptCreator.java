@@ -1,4 +1,5 @@
 package thomas.nill.testdaten;
+
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
@@ -19,80 +20,82 @@ import thomas.nill.testdaten.basis.Values;
 
 /**
  * Creates a value with a script language
+ * 
  * @author tnill
- * <p>
- * This {@link ValueCreator} is used in {@link ResourceCreatorFabric}
- * In the resource properties file for every name is a short script.
- * <p>
- * An example:
- * <p>
- * {@literal provider=t-online.de|gmx.de|web.de|hotmail.de|yahoo.de}<br>
- * {@literal sex=m|w}<br>
- * {@literal firstname_w = Luise| Lotte|Susanne|Emmy|Sonja|}<br>
- * {@literal firstname_m = Manfred|Thomas|Ralf|Carl Friedrich|Hermann|Bernhard|Leonhard|David}<br>
- * {@literal firstname={firstname_{sex}}}<br>
- * {@literal name={title}{firstname} {lastname}}<br>
- * {@literal email={firstname}.{lastname}@{provider}}<br>
- * <p>
- * the {@literal provider=t-online.de|gmx.de|web.de|hotmail.de|yahoo.de}<br>
- * create a instance of {@link StringListCreator}. The same for
- * {@literal sex=m|w} and firstname_w, firstname_m
- * <p>
- * firstname={firstname_{sex}} is a little script, it refers with
- * {sex} to the sex array. If sex=w then it look in the array
- * firstname_w for a name. If sex=m it look in the array firstname_m.
- * <p> 
- * {@literal name={title}{firstname} {lastname}}<br>
- * describes a simple concatenation.
- * <p>
- * {@literal email={firstname}.{lastname}@{provider}|firstChar({firstname}).{lastname}@{provider}}<br>
- * is a switch with | as seperator between
- * <p>
- * {@literal email={firstname}.{lastname}@{provider}}<br>
- * and<br>
- * {@literal email=firstChar({firstname}).{lastname}@{provider}}<br>
- * <p>
- * The firstChar is a function applies to {@literal {firstname}}
- * <p>
- * Constructor calls look like:
- * <p>
- * {@literal initDistribution_lastname=thomas.nill.testdaten.DistributionCreator[thomas.nill.testdaten.random.ArrayDistribution 0.3 0.2 0.2 0.2 0.1]}<br>
- * {@literal initDistribution_streetName=thomas.nill.testdaten.DistributionFunctionCreator[thomas.nill.testdaten.random.GauﬂDistribution 10 5.0 2.0]}<br>
- * <p>
- * for distributions that are use in lastname, streetName. The initDistribution_
- * is a hint, that distributions will be instantiated.
- * <p>
- * For the creation of sub bean, are the constructors
- * <p>
- * {@literal addAnschreiben=thomas.nill.testdaten.BeanListCreator[tests.Anschreiben 5]}<br>
+ *         <p>
+ *         This {@link ValueCreator} is used in {@link ResourceCreatorFabric} In
+ *         the resource properties file for every name is a short script.
+ *         <p>
+ *         An example:
+ *         <p>
+ *         {@literal provider=t-online.de|gmx.de|web.de|hotmail.de|yahoo.de}<br>
+ *         {@literal sex=m|w}<br>
+ *         {@literal firstname_w = Luise| Lotte|Susanne|Emmy|Sonja|}<br>
+ *         {@literal firstname_m = Manfred|Thomas|Ralf|Carl Friedrich|Hermann|Bernhard|Leonhard|David}<br>
+ *         {@literal firstname={firstname_{sex}}}<br>
+ *         {@literal name={title}{firstname} {lastname}}<br>
+ *         {@literal email={firstname}.{lastname}@{provider}}<br>
+ *         <p>
+ *         the
+ *         {@literal provider=t-online.de|gmx.de|web.de|hotmail.de|yahoo.de}<br>
+ *         create a instance of {@link StringListCreator}. The same for
+ *         {@literal sex=m|w} and firstname_w, firstname_m
+ *         <p>
+ *         firstname={firstname_{sex}} is a little script, it refers with {sex}
+ *         to the sex array. If sex=w then it look in the array firstname_w for
+ *         a name. If sex=m it look in the array firstname_m.
+ *         <p>
+ *         {@literal name={title}{firstname} {lastname}}<br>
+ *         describes a simple concatenation.
+ *         <p>
+ *         {@literal email={firstname}.{lastname}@{provider}|firstChar({firstname}).{lastname}@{provider}}<br>
+ *         is a switch with | as seperator between
+ *         <p>
+ *         {@literal email={firstname}.{lastname}@{provider}}<br>
+ *         and<br>
+ *         {@literal email=firstChar({firstname}).{lastname}@{provider}}<br>
+ *         <p>
+ *         The firstChar is a function applies to {@literal {firstname}}
+ *         <p>
+ *         Constructor calls look like:
+ *         <p>
+ *         {@literal initDistribution_lastname=thomas.nill.testdaten.DistributionCreator[thomas.nill.testdaten.random.ArrayDistribution 0.3 0.2 0.2 0.2 0.1]}<br>
+ *         {@literal initDistribution_streetName=thomas.nill.testdaten.DistributionFunctionCreator[thomas.nill.testdaten.random.GaussDistribution 10 5.0 2.0]}<br>
+ *         <p>
+ *         for distributions that are use in lastname, streetName. The
+ *         initDistribution_ is a hint, that distributions will be instantiated.
+ *         <p>
+ *         For the creation of sub bean, are the constructors
+ *         <p>
+ *         {@literal addAnschreiben=thomas.nill.testdaten.BeanListCreator[tests.Anschreiben 5]}<br>
  * 
  * @see thomas.nill.testdaten.basis.ValueCreator
  *
  */
 @Slf4j
-public class ScriptCreator extends scriptBaseVisitor<Object> implements ValueCreator<Object>{
+public class ScriptCreator extends scriptBaseVisitor<Object> implements ValueCreator<Object> {
 	private ResourceCreatorFabric fabric = null;
 	private Values values = null;
 	private ValueCreator<?> delegateValueCreator;
 	private String expression;
 
-	public ScriptCreator(@NonNull String name,@NonNull String expression,@NonNull ResourceCreatorFabric fabric) {
+	public ScriptCreator(@NonNull String name, @NonNull String expression, @NonNull ResourceCreatorFabric fabric) {
 		super();
 		this.fabric = fabric;
-	
+
 		this.expression = expression;
 	}
 
 	public Object auswerten(@NonNull String expression) {
 		if (values == null) {
 			values = new Values();
-		};
+		}
 		scriptLexer lexer = new scriptLexer(new ANTLRInputStream(expression));
 		scriptParser parser = new scriptParser(new CommonTokenStream(lexer));
 		ParseTree tree = parser.script();
 		return visit(tree);
 	}
-	
+
 	@Override
 	public Object generateValue(@NonNull Values v) {
 		values = v;
@@ -101,7 +104,7 @@ public class ScriptCreator extends scriptBaseVisitor<Object> implements ValueCre
 
 	@Override
 	public Object visitTextsentence(scriptParser.TextsentenceContext ctx) {
-		return getText(ctx.TEXT()) ;
+		return getText(ctx.TEXT());
 	}
 
 	@Override
@@ -123,7 +126,7 @@ public class ScriptCreator extends scriptBaseVisitor<Object> implements ValueCre
 		log.debug("visitNormalSentence= " + ctx.getText());
 		String nachfolger = "";
 		if (ctx.listsentence() != null && !ctx.listsentence().isEmpty()) {
-			nachfolger =  visitListsentence(ctx.listsentence()).toString();
+			nachfolger = visitListsentence(ctx.listsentence()).toString();
 		}
 		if (ctx.rsentence() != null && ctx.rsentence().sentence() != null) {
 			log.debug("visitRsentence= " + ctx.rsentence().getText());
@@ -147,22 +150,21 @@ public class ScriptCreator extends scriptBaseVisitor<Object> implements ValueCre
 			return visitConstructorCall(ctx.constructorCall());
 		}
 		if (ctx.normalSentence() != null) {
-			return getText(ctx.OTHERS(0)) + visitNormalSentence(ctx.normalSentence())  + getText(ctx.OTHERS(1));
+			return getText(ctx.OTHERS(0)) + visitNormalSentence(ctx.normalSentence()) + getText(ctx.OTHERS(1));
 		}
 		return "visitSentence";
 	}
 
-	private String getText(TerminalNode node){
-		return (node== null) ? "" : node.getText();
+	private String getText(TerminalNode node) {
+		return (node == null) ? "" : node.getText();
 	}
-
 
 	@Override
 	public Object visitConstructorCall(scriptParser.ConstructorCallContext ctx) {
 		if (delegateValueCreator == null) {
 			delegateValueCreator = (ValueCreator<?>) createValueConstructor(ctx);
 		}
-		return  delegateValueCreator.generateValue(values);
+		return delegateValueCreator.generateValue(values);
 	}
 
 	private Object createValueConstructor(scriptParser.ConstructorCallContext ctx) {
@@ -171,23 +173,19 @@ public class ScriptCreator extends scriptBaseVisitor<Object> implements ValueCre
 			String className = ctx.TEXT().getText();
 			String[] args = buildConstructorArgumentList(ctx);
 			clazz = Thread.currentThread().getContextClassLoader().loadClass(className);
-			try {
-				return new ConstructorHelper().searchConstructorAndCreate(clazz, args);
 
-			} catch (IllegalAccessException | InvocationTargetException | InstantiationException e) {
-				e.printStackTrace();
-				throw new TestdataException("The Class " + clazz + " has not a constructor for " + args.length
-						+ " arguments or an argument and the class of the argument did not match");
-			}
+			return new ConstructorHelper().searchConstructorAndCreate(clazz, args);
+
+		} catch (IllegalAccessException | InvocationTargetException | InstantiationException e) {
+			throw new TestdataException("The Class " + clazz + " has not a constructor for arguments or an argument and the class of the argument did not match");
 		} catch (ClassNotFoundException e) {
 			throw new TestdataException("The Class " + clazz + " does not exist");
 		}
 	}
 
-
 	private String[] buildConstructorArgumentList(scriptParser.ConstructorCallContext ctx) {
 		List<TerminalNode> argList = ctx.constructorArgs().TEXT();
-		String args[] = new String[argList.size()];
+		String[] args = new String[argList.size()];
 		int i = 0;
 		for (TerminalNode node : argList) {
 			args[i] = node.getText();
@@ -198,7 +196,7 @@ public class ScriptCreator extends scriptBaseVisitor<Object> implements ValueCre
 
 	@Override
 	public Object visitListsentence(scriptParser.ListsentenceContext ctx) {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		if (ctx.sentence() != null) {
 
 			List<scriptParser.SentenceContext> liste = ctx.sentence();

@@ -1,6 +1,7 @@
 package thomas.nill.testdaten.basis;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import lombok.NonNull;
 /**
@@ -11,7 +12,7 @@ import lombok.NonNull;
  * Every value has a name. 
  */
 public class Values {
-	HashMap<String, Object> values = new HashMap<>();
+	private Map<String, Object> map = new HashMap<>();
 
 
 	public Values() {
@@ -19,18 +20,18 @@ public class Values {
 	}
 
 	public Object get(@NonNull String key) {
-		return values.get(key);
+		return map.get(key);
 	}
 
 	public Object put(@NonNull String key, @NonNull Object value) {
-		return values.put(key, value);
+		return map.put(key, value);
 	}
 
 	public Object remove(@NonNull String key) {
-		return values.remove(key);
+		return map.remove(key);
 	}
 	
-	public HashMap<String, Object> getValues() {
-		return values;
+	public Map<String, Object> getValues() {
+		return map;
 	}
 }

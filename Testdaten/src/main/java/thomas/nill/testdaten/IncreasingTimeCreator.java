@@ -19,12 +19,12 @@ public class IncreasingTimeCreator extends TimeSerie implements ValueCreator<Loc
     	if (count<0) {
     		throw new IllegalArgumentException("count > 0 not " + count);
     	}
-    	time = LocalDateTime.now().minus(count * maxStep,unit);
+    	time = LocalDateTime.now().minus((long)(count * maxStep),unit);
     }
 
 	@Override
 	public LocalDateTime generateValue(@NonNull Values values) {
-		return replaceNewValue(time.plus(1+timeStep.generateValue(values), unit));
+		return replaceNewValue(time.plus(1L+timeStep.generateValue(values), unit));
 	}
 
 }

@@ -1,7 +1,7 @@
 package thomas.nill.testdaten;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.function.Function;
+import java.util.function.IntToDoubleFunction;
 
 import lombok.NonNull;
 import thomas.nill.testdaten.basis.ConstructorHelper;
@@ -32,13 +32,12 @@ public class DistributionFunctionCreator implements ValueCreator<Distribution> {
     	}
 		try {
 			Object obj = new ConstructorHelper().searchConstructorAndCreate(clazz, args);
-			if (!(obj instanceof Function<?,?>)) {
+			if (!(obj instanceof IntToDoubleFunction)) {
 				throw new TestdataException("The Class "+clazz.getSimpleName() + " is not a Function<Integer,Double> ");
 			}
-			Function<Integer,Double> fun = (Function<Integer,Double>)obj;
+			IntToDoubleFunction fun = (IntToDoubleFunction)obj;
 			distribution = new ArrayDistribution(max,fun);
 		} catch (IllegalAccessException | InvocationTargetException | InstantiationException e) {
-			e.printStackTrace();
 			throw new TestdataException("The Class " + clazz + " has not a constructor for " + args.length
 					+ " arguments or an argument and the class of the argument did not match");
 		}

@@ -27,7 +27,7 @@ public class DecreasingTimeCreator extends TimeSerie implements ValueCreator<Loc
 
 	@Override
 	public LocalDateTime generateValue(@NonNull Values values) {
-		return replaceNewValue(time.minus(1+timeStep.generateValue(values), unit));
+		return replaceNewValue(time.minus(1L+timeStep.generateValue(values), unit));
 	}
 
 	

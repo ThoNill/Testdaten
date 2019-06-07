@@ -1,6 +1,7 @@
 package thomas.nill.testdaten.basis;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import lombok.NonNull;
 import thomas.nill.testdaten.ResourceCreatorFabric;
@@ -14,17 +15,17 @@ import thomas.nill.testdaten.ResourceCreatorFabric;
  *         Instances of this class stores {@link ValueCreator}
  */
 public class Creators {
-	HashMap<String, ValueCreator<?>> values = new HashMap<>();
+	private Map<String, ValueCreator> values = new HashMap<>();
 
 	public Creators() {
 		super();
 	}
 
-	public ValueCreator<?> get(@NonNull String key) {
+	public ValueCreator get(@NonNull String key) {
 		return values.get(key);
 	}
 
-	public Object put(@NonNull String key, @NonNull ValueCreator<?> value) {
+	public Object put(@NonNull String key, @NonNull ValueCreator value) {
 		return values.put(key, value);
 	}
 

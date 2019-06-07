@@ -1,18 +1,18 @@
 package thomas.nill.testdaten.random;
 
-import java.util.function.Function;
+import java.util.function.IntToDoubleFunction;
 /**
  * Normal or Gauﬂ Distribution
  * 
  * @author tnill
  *
  */
-public class GauﬂDistribution implements Function<Integer,Double> {
+public class GaussDistribution implements IntToDoubleFunction {
 	private double my;
 	private double sigmaSquare;
 	private double norm;
 	
-	public GauﬂDistribution(double my, double sigma) {
+	public GaussDistribution(double my, double sigma) {
 		super();
 		this.my = my;
 		this.sigmaSquare = 2 * sigma*sigma;
@@ -20,11 +20,12 @@ public class GauﬂDistribution implements Function<Integer,Double> {
 	}
 
 	@Override
-	public Double apply(Integer t) {
-		double x = t.doubleValue();
-		double x0 = - (x-my) * (x-my) / sigmaSquare; 
+	public double applyAsDouble(int t){
+		double x0 = - (t-my) * (t-my) / sigmaSquare; 
 		return norm * Math.exp(x0);
 	}
+
+
 	
 }
 

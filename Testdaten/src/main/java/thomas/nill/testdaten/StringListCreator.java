@@ -14,7 +14,7 @@ import thomas.nill.testdaten.random.HasDistribution;
  */
 public class StringListCreator implements ValueCreator<String>, HasDistribution{
     
-	private String texte[];
+	private String[] texte;
     private RangeCreator bereich;
     
     public StringListCreator(@NonNull String text) {

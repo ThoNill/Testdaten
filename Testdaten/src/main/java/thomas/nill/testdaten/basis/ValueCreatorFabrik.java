@@ -9,5 +9,5 @@ import thomas.nill.testdaten.ResourceCreatorFabric;
  * A {@link ResourceCreatorFabric} is a implementation of this interface.
  */
 public interface ValueCreatorFabrik {
-	ValueCreator<?> searchCreator(String name);
+	ValueCreator searchCreator(String name);
 }

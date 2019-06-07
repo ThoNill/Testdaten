@@ -29,7 +29,7 @@ public class PastDateCreator implements ValueCreator<LocalDate>, HasDistribution
 
     @Override
     public LocalDate generateValue(@NonNull Values values) {
-    	return LocalDate.now().minusDays(1+daysInThePast.generateValue(values));
+    	return LocalDate.now().minusDays(1L+daysInThePast.generateValue(values));
     }
 
 	@Override

@@ -1,19 +1,21 @@
 package thomas.nill.testdaten.random;
 
-public class EqualDistribution extends Distribution{
+import java.util.Random;
 
+public class EqualDistribution extends Distribution{
+    private Random r;
+    
 	public EqualDistribution(int max) {
 		super(max);
 		if (max<0) {
-    		throw new IllegalArgumentException("max > 0 not " + max);
+    		throw new IllegalArgumentException("max >= 0 not " + max);
     	}
-    
+		r = new Random();
 	}
 
 	@Override
 	public int randomNumberLowerOrEqualsThenMax() {
-		int n = (int) (Math.random() * (max + 1));
-		return (n > max) ? max : n;
+		return r.nextInt(max+1);
 	}
 
 }

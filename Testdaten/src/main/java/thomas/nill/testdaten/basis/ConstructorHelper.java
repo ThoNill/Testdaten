@@ -71,7 +71,7 @@ public class ConstructorHelper {
 
 	private Object correctTypesAndCallConstructor(Class<?> clazz, String[] args, final Class<?>[] ctorParams)
 			throws IllegalAccessException, InvocationTargetException, InstantiationException {
-		Object oargs[] = new Object[ctorParams.length];
+		Object[] oargs = new Object[ctorParams.length];
 		boolean canCorrected = correctTypesOfObjects(oargs, args, ctorParams);
 		if (canCorrected) {
 			try {

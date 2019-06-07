@@ -63,12 +63,12 @@ public class ResourceCreatorFabric implements ValueCreatorFabrik {
 				for (String t : texte) {
 					liste.add(new ScriptCreator(name, t, this));
 				}
-				return new LookupCreator<Object>(name, new SwitchCreator(liste));
+				return new LookupCreator<>(name, new SwitchCreator(liste));
 			} else {
-				return new LookupCreator<Object>(name, new ScriptCreator(name, text, this));
+				return new LookupCreator<>(name, new ScriptCreator(name, text, this));
 			}
 		}
-		return new LookupCreator<String>(name, new StringListCreator(text));
+		return new LookupCreator<>(name, new StringListCreator(text));
 	}
 
 	public Values getValues(@NonNull Values values) {
@@ -84,18 +84,17 @@ public class ResourceCreatorFabric implements ValueCreatorFabrik {
 				searchCreator(key).generateValue(values);
 			}
 		}
-		;
 	}
 
 	private void initDistributions(Values values) {
 		Enumeration<String> e = labels.getKeys();
 		while (e.hasMoreElements()) {
 			String key = e.nextElement();
-			initDistribution(values, e, key);
+			initDistribution(values, key);
 		}
 	}
 
-	private void initDistribution(Values values, Enumeration<String> e, String key) {
+	private void initDistribution(Values values, String key) {
 		if (key.startsWith(INIT_DISTRIBUTION)) {
 			ValueCreator c = searchCreator(key.substring(INIT_DISTRIBUTION.length()));
 			if (!(c instanceof HasDistribution)) {

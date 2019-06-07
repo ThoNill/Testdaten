@@ -29,7 +29,6 @@ public class DistributionCreator implements ValueCreator<Distribution> {
 			}
 			distribution = (Distribution)obj;
 		} catch (IllegalAccessException | InvocationTargetException | InstantiationException e) {
-			e.printStackTrace();
 			throw new TestdataException("The Class " + clazz + " has not a constructor for " + args.length
 					+ " arguments or an argument and the class of the argument did not match");
 		}

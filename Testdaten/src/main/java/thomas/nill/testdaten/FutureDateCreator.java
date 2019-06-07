@@ -28,7 +28,7 @@ public class FutureDateCreator implements ValueCreator<LocalDate>, HasDistributi
 
     @Override
     public LocalDate generateValue(@NonNull Values values) {
-    	return LocalDate.now().plusDays(1+daysInTheFuture.generateValue(values));
+    	return LocalDate.now().plusDays(1L+daysInTheFuture.generateValue(values));
     }
 
 	@Override
